@@ -39,7 +39,7 @@ export const GameHistory = () => {
     }
 
     return (
-        <Card>
+        <Card className="max-w-md mx-auto">
             <CardHeader>
                 <CardTitle className="text-center">Recent Games</CardTitle>
             </CardHeader>

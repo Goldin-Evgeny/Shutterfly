@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { useGameStore, type Choice } from '../store/gameStore'
-import React from 'react'
 import rockIcon from '../assets/rock.svg'
 import paperIcon from '../assets/paper.svg'
 import scissorsIcon from '../assets/scissors.svg'
+import SplitText from './SplitText'
 
 const choiceIcons = {
     rock: rockIcon,
@@ -31,20 +31,29 @@ export const Game = () => {
         makeChoice(choice)
     }
 
-    const getResultText = () => {
-        if (!result) return 'Choose your weapon!'
-        if (result === 'win') return 'You win! 🎉'
-        if (result === 'lose') return 'Computer wins! 😔'
-        return "It's a draw! 🤝"
+    const resultTexts = {
+        win: 'You win! 🎉',
+        lose: 'Computer wins! 😔',
+        draw: "It's a draw! 🤝",
+        default: 'Choose your weapon!'
     }
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 max-w-md mx-auto">
             {/* Game Result */}
             <Card className="min-h-[200px]">
                 <CardHeader>
                     <CardTitle className="text-center text-xl">
-                        {getResultText()}
+                        <SplitText
+                            key={result}
+                            text={resultTexts[result as keyof typeof resultTexts] || resultTexts.default}
+                            className="text-2xl font-bold"
+                            delay={50}
+                            duration={0.8}
+                            splitType="chars"
+                            from={{ opacity: 0, y: 30, scale: 0.8 }}
+                            to={{ opacity: 1, y: 0, scale: 1 }}
+                        />
                     </CardTitle>
                 </CardHeader>
                 <CardContent>

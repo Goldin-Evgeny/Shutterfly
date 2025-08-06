@@ -12,12 +12,11 @@ function App() {
 
         <div className="flex flex-col gap-4">
           {/* Scoreboard */}
-          <div className="lg:col-span-1">
-            <Scoreboard />
-          </div>
+
+          <Scoreboard />
 
           {/* Game */}
-          <div className="lg:col-span-2">
+          <div>
             <Game />
           </div>
         </div>
