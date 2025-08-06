@@ -48,17 +48,25 @@ export const GameHistory = () => {
                     {gameHistory.slice(0, 10).map((game, index) => (
                         <div key={index} className="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
                             <div className="flex items-center gap-3">
-                                <img
-                                    src={choiceIcons[game.playerChoice]}
-                                    alt={game.playerChoice}
-                                    className="w-5 "
-                                />
+                                <div className="flex flex-col items-center">
+                                    <img
+                                        src={choiceIcons[game.playerChoice]}
+                                        alt={game.playerChoice}
+                                        className="w-5"
+                                    />
+                                    <span className="text-xs text-gray-400">P1</span>
+                                </div>
                                 <span className="text-sm">vs</span>
-                                <img
-                                    src={choiceIcons[game.computerChoice]}
-                                    alt={game.computerChoice}
-                                    className="w-5 "
-                                />
+                                <div className="flex flex-col items-center">
+                                    <img
+                                        src={choiceIcons[game.gameMode === 'pve' ? game.computerChoice! : game.player2Choice!]}
+                                        alt={game.gameMode === 'pve' ? game.computerChoice! : game.player2Choice!}
+                                        className="w-5"
+                                    />
+                                    <span className="text-xs text-gray-400">
+                                        {game.gameMode === 'pve' ? 'CPU' : 'P2'}
+                                    </span>
+                                </div>
                             </div>
                             <div className="flex items-center gap-2">
                                 <span className={`text-sm font-medium ${resultColors[game.result]}`}>

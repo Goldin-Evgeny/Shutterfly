@@ -1,6 +1,7 @@
 import { Scoreboard } from './components/Scoreboard'
 import { Game } from './components/Game'
 import { GameHistory } from './components/GameHistory'
+import { GameModeSelector } from './components/GameModeSelector'
 
 function App() {
   return (
@@ -11,8 +12,10 @@ function App() {
         </h1>
 
         <div className="flex flex-col gap-4">
-          {/* Scoreboard */}
+          {/* Game Mode Selector */}
+          <GameModeSelector />
 
+          {/* Scoreboard */}
           <Scoreboard />
 
           {/* Game */}

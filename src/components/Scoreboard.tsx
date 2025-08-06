@@ -4,7 +4,7 @@ import { useGameStore } from '../store/gameStore'
 import { RotateCcw } from 'lucide-react'
 
 export const Scoreboard = () => {
-    const { playerScore, computerScore, resetScores } = useGameStore()
+    const { playerScore, computerScore, player2Score, gameMode, resetScores } = useGameStore()
 
     return (
         <Card className="w-full max-w-md mx-auto">
@@ -17,12 +17,16 @@ export const Scoreboard = () => {
                 <div className="flex justify-between items-center">
                     <div className="text-center w-16">
                         <div className="text-3xl font-bold text-blue-600">{playerScore}</div>
-                        <div className="text-sm text-gray-300">Player</div>
+                        <div className="text-sm text-gray-300">Player 1</div>
                     </div>
                     <div className="text-2xl font-bold text-gray-300">vs</div>
                     <div className="text-center w-16">
-                        <div className="text-3xl font-bold text-red-600">{computerScore}</div>
-                        <div className="text-sm text-gray-300">Computer</div>
+                        <div className="text-3xl font-bold text-red-600">
+                            {gameMode === 'pve' ? computerScore : player2Score}
+                        </div>
+                        <div className="text-sm text-gray-300">
+                            {gameMode === 'pve' ? 'Computer' : 'Player 2'}
+                        </div>
                     </div>
                 </div>
 

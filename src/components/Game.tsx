@@ -19,6 +19,13 @@ const choiceColors: Record<Choice, string> = {
 }
 
 const resultTexts: Record<GameResult | 'default', string> = {
+    win: 'Player 1 wins! 🎉',
+    lose: 'Player 2 wins! 🎉',
+    draw: "It's a draw! 🤝",
+    default: 'Choose your weapon!'
+}
+
+const pveResultTexts: Record<GameResult | 'default', string> = {
     win: 'You win! 🎉',
     lose: 'Computer wins! 😔',
     draw: "It's a draw! 🤝",
@@ -27,12 +34,52 @@ const resultTexts: Record<GameResult | 'default', string> = {
 
 export const Game = () => {
     const {
+        gameMode,
         playerChoice,
         computerChoice,
+        player2Choice,
         result,
+        currentPlayer,
         makeChoice,
         resetGame
     } = useGameStore()
+
+    const getResultText = () => {
+        if (!result) return gameMode === 'pve' ? pveResultTexts.default : resultTexts.default
+        return gameMode === 'pve' ? pveResultTexts[result] : resultTexts[result]
+    }
+
+    const getCurrentPlayerText = () => {
+        if (gameMode === 'pve') return 'Make Your Choice'
+        if (currentPlayer === 'player2') return "Player 2's Turn"
+        if (result) return 'Game Complete'
+        return "Player 1's Turn"
+    }
+
+    const getOpponentChoice = () => {
+        if (gameMode === 'pve') {
+            return computerChoice
+        } else {
+            return player2Choice
+        }
+    }
+
+    const getOpponentLabel = () => {
+        return gameMode === 'pve' ? 'Computer' : 'Player 2'
+    }
+
+    const canMakeChoice = () => {
+        if (gameMode === 'pve') return !result
+        if (currentPlayer === 'player2') return true
+        if (currentPlayer === null && !result) return true
+        return false
+    }
+
+    const shouldShowPlayer1Choice = () => {
+        if (gameMode === 'pve') return !!playerChoice
+        // In PvP mode, only show Player 1's choice when both have chosen or game is complete
+        return !!playerChoice && (!!player2Choice || !!result)
+    }
 
     return (
         <div className="space-y-6 max-w-md mx-auto">
@@ -46,34 +93,34 @@ export const Game = () => {
                                 fontSize={2}
                                 key={result}
                             >
-                                {resultTexts[result] || resultTexts.default}
+                                {getResultText()}
                             </ComicText>
                         ) : (
-                            resultTexts.default
+                            getResultText()
                         )}
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-center items-start gap-8">
                         <div className="text-center flex flex-col items-center">
-                            <div className="text-sm text-gray-300 mb-2">Your Choice</div>
-                            {playerChoice && (
+                            <div className="text-sm text-gray-300 mb-2">Player 1</div>
+                            {shouldShowPlayer1Choice() && (
                                 <div className="text-4xl min-h-16 flex items-center justify-center">
                                     <img
-                                        src={choiceIcons[playerChoice]}
-                                        alt={playerChoice}
+                                        src={choiceIcons[playerChoice!]}
+                                        alt={playerChoice!}
                                         className="w-12 "
                                     />
                                 </div>
                             )}
                         </div>
                         <div className="text-center flex flex-col items-center">
-                            <div className="text-sm text-gray-300 mb-2">Computer</div>
-                            {computerChoice && (
+                            <div className="text-sm text-gray-300 mb-2">{getOpponentLabel()}</div>
+                            {getOpponentChoice() && (
                                 <div className="text-4xl min-h-16 flex items-center justify-center">
                                     <img
-                                        src={choiceIcons[computerChoice]}
-                                        alt={computerChoice}
+                                        src={choiceIcons[getOpponentChoice()!]}
+                                        alt={getOpponentChoice()!}
                                         className="w-12 "
                                     />
                                 </div>
@@ -86,7 +133,7 @@ export const Game = () => {
             {/* Choice Buttons */}
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-center">Make Your Choice</CardTitle>
+                    <CardTitle className="text-center">{getCurrentPlayerText()}</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-center">
@@ -94,7 +141,8 @@ export const Game = () => {
                             {/* Rock - Top */}
                             <Button
                                 onClick={() => makeChoice('rock')}
-                                className={`${choiceColors.rock} text-white absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform`}
+                                disabled={!canMakeChoice()}
+                                className={`${choiceColors.rock} text-white absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed`}
                                 size="lg"
                             >
                                 <img
@@ -107,7 +155,8 @@ export const Game = () => {
                             {/* Paper - Bottom Left */}
                             <Button
                                 onClick={() => makeChoice('paper')}
-                                className={`${choiceColors.paper} text-white absolute bottom-2 left-4 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform`}
+                                disabled={!canMakeChoice()}
+                                className={`${choiceColors.paper} text-white absolute bottom-2 left-4 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed`}
                                 size="lg"
                             >
                                 <img
@@ -120,7 +169,8 @@ export const Game = () => {
                             {/* Scissors - Bottom Right */}
                             <Button
                                 onClick={() => makeChoice('scissors')}
-                                className={`${choiceColors.scissors} text-white absolute bottom-2 right-4 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform`}
+                                disabled={!canMakeChoice()}
+                                className={`${choiceColors.scissors} text-white absolute bottom-2 right-4 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed`}
                                 size="lg"
                             >
                                 <img
@@ -135,7 +185,7 @@ export const Game = () => {
             </Card>
 
             {/* Reset Button */}
-            {(playerChoice || computerChoice) && (
+            {(result || (gameMode === 'pve' && (playerChoice || getOpponentChoice())) || (gameMode === 'pvp' && playerChoice && player2Choice)) && (
                 <div className="flex justify-center">
                     <Button onClick={resetGame} variant="outline">
                         Play Again
