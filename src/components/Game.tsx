@@ -54,27 +54,27 @@ export const Game = () => {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex justify-center items-center gap-8">
-                        <div className="text-center">
-                            <div className="text-sm text-gray-600 mb-2">Your Choice</div>
+                    <div className="flex justify-center items-start gap-8">
+                        <div className="text-center flex flex-col items-center">
+                            <div className="text-sm text-gray-300 mb-2">Your Choice</div>
                             {playerChoice && (
-                                <div className="text-4xl">
+                                <div className="text-4xl min-h-16 flex items-center justify-center">
                                     <img
                                         src={choiceIcons[playerChoice]}
                                         alt={playerChoice}
-                                        className="w-12 h-12"
+                                        className="w-12 "
                                     />
                                 </div>
                             )}
                         </div>
-                        <div className="text-center">
-                            <div className="text-sm text-gray-600 mb-2">Computer</div>
+                        <div className="text-center flex flex-col items-center">
+                            <div className="text-sm text-gray-300 mb-2">Computer</div>
                             {computerChoice && (
-                                <div className="text-4xl">
+                                <div className="text-4xl min-h-16 flex items-center justify-center">
                                     <img
                                         src={choiceIcons[computerChoice]}
                                         alt={computerChoice}
-                                        className="w-12 h-12"
+                                        className="w-12 "
                                     />
                                 </div>
                             )}
@@ -100,7 +100,7 @@ export const Game = () => {
                                 <img
                                     src={choiceIcons.rock}
                                     alt="rock"
-                                    className="w-8 h-8"
+                                    className="w-8"
                                 />
                             </Button>
 
@@ -113,7 +113,7 @@ export const Game = () => {
                                 <img
                                     src={choiceIcons.paper}
                                     alt="paper"
-                                    className="w-8 h-8"
+                                    className="w-8"
                                 />
                             </Button>
 
@@ -126,7 +126,7 @@ export const Game = () => {
                                 <img
                                     src={choiceIcons.scissors}
                                     alt="scissors"
-                                    className="w-8 h-8"
+                                    className="w-8"
                                 />
                             </Button>
                         </div>

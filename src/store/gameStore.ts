@@ -88,7 +88,10 @@ export const useGameStore = create<GameState & GameActions>((set) => ({
         set({
             playerScore: 0,
             computerScore: 0,
-            gameHistory: []
+            gameHistory: [],
+            playerChoice: null,
+            computerChoice: null,
+            result: null
         })
     }
 })) 

@@ -9,7 +9,7 @@ export const Scoreboard = () => {
     return (
         <Card className="w-full max-w-md mx-auto">
             <CardHeader>
-                <CardTitle className="text-center text-2xl font-bold text-gray-800">
+                <CardTitle className="text-center text-2xl font-bold text-white">
                     Scoreboard
                 </CardTitle>
             </CardHeader>
@@ -17,12 +17,12 @@ export const Scoreboard = () => {
                 <div className="flex justify-between items-center">
                     <div className="text-center w-16">
                         <div className="text-3xl font-bold text-blue-600">{playerScore}</div>
-                        <div className="text-sm text-gray-600">Player</div>
+                        <div className="text-sm text-gray-300">Player</div>
                     </div>
-                    <div className="text-2xl font-bold text-gray-400">vs</div>
+                    <div className="text-2xl font-bold text-gray-300">vs</div>
                     <div className="text-center w-16">
                         <div className="text-3xl font-bold text-red-600">{computerScore}</div>
-                        <div className="text-sm text-gray-600">Computer</div>
+                        <div className="text-sm text-gray-300">Computer</div>
                     </div>
                 </div>
 
