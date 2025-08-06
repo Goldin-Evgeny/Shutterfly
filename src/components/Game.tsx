@@ -83,22 +83,47 @@ export const Game = () => {
                     <CardTitle className="text-center">Make Your Choice</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex justify-center gap-4">
-                        {(['rock', 'paper', 'scissors'] as Choice[]).map((choice) => (
+                    <div className="flex justify-center">
+                        <div className="relative w-48 h-40">
+                            {/* Rock - Top */}
                             <Button
-                                key={choice}
-                                onClick={() => handleChoice(choice)}
-                                className={`${choiceColors[choice]} text-white text-lg px-6 py-3 min-w-[100px]`}
+                                onClick={() => handleChoice('rock')}
+                                className={`${choiceColors.rock} text-white absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform`}
                                 size="lg"
                             >
                                 <img
-                                    src={choiceIcons[choice]}
-                                    alt={choice}
-                                    className="w-6 h-6 mr-2"
+                                    src={choiceIcons.rock}
+                                    alt="rock"
+                                    className="w-8 h-8"
                                 />
-                                {choice.charAt(0).toUpperCase() + choice.slice(1)}
                             </Button>
-                        ))}
+
+                            {/* Paper - Bottom Left */}
+                            <Button
+                                onClick={() => handleChoice('paper')}
+                                className={`${choiceColors.paper} text-white absolute bottom-2 left-4 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform`}
+                                size="lg"
+                            >
+                                <img
+                                    src={choiceIcons.paper}
+                                    alt="paper"
+                                    className="w-8 h-8"
+                                />
+                            </Button>
+
+                            {/* Scissors - Bottom Right */}
+                            <Button
+                                onClick={() => handleChoice('scissors')}
+                                className={`${choiceColors.scissors} text-white absolute bottom-2 right-4 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform`}
+                                size="lg"
+                            >
+                                <img
+                                    src={choiceIcons.scissors}
+                                    alt="scissors"
+                                    className="w-8 h-8"
+                                />
+                            </Button>
+                        </div>
                     </div>
                 </CardContent>
             </Card>
