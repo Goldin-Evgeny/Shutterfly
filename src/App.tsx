@@ -1,34 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Scoreboard } from './components/Scoreboard'
+import { Game } from './components/Game'
+import { GameHistory } from './components/GameHistory'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
+          Rock, Paper, Scissors
+        </h1>
+
+        <div className="flex flex-col gap-4">
+          {/* Scoreboard */}
+          <div className="lg:col-span-1">
+            <Scoreboard />
+          </div>
+
+          {/* Game */}
+          <div className="lg:col-span-2">
+            <Game />
+          </div>
+        </div>
+
+        {/* Game History */}
+        <div className="mt-8">
+          <GameHistory />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
