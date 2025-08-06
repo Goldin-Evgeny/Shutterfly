@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
-import { useGameStore, type Choice } from '../store/gameStore'
+import { useGameStore, type Choice, type GameResult } from '../store/gameStore'
 import rockIcon from '../assets/rock.svg'
 import paperIcon from '../assets/paper.svg'
 import scissorsIcon from '../assets/scissors.svg'
@@ -12,13 +12,13 @@ const choiceIcons = {
     scissors: scissorsIcon
 }
 
-const choiceColors = {
+const choiceColors: Record<Choice, string> = {
     rock: 'bg-orange-500 hover:bg-orange-600',
     paper: 'bg-blue-500 hover:bg-blue-600',
     scissors: 'bg-green-500 hover:bg-green-600'
 }
 
-const resultTexts = {
+const resultTexts: Record<GameResult | 'default', string> = {
     win: 'You win! 🎉',
     lose: 'Computer wins! 😔',
     draw: "It's a draw! 🤝",
@@ -46,7 +46,7 @@ export const Game = () => {
                                 fontSize={2}
                                 key={result}
                             >
-                                {resultTexts[result as keyof typeof resultTexts] || resultTexts.default}
+                                {resultTexts[result] || resultTexts.default}
                             </ComicText>
                         ) : (
                             resultTexts.default

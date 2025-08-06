@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
-import { useGameStore } from '../store/gameStore'
+import { useGameStore, type GameResult } from '../store/gameStore'
 import rockIcon from '../assets/rock.svg'
 import paperIcon from '../assets/paper.svg'
 import scissorsIcon from '../assets/scissors.svg'
@@ -10,16 +10,16 @@ const choiceIcons = {
     scissors: scissorsIcon
 }
 
-const getResultColor = (result: string) => {
-    if (result === 'win') return 'text-green-600'
-    if (result === 'lose') return 'text-red-600'
-    return 'text-yellow-600'
+const resultColors: Record<GameResult, string> = {
+    win: 'text-green-600',
+    lose: 'text-red-600',
+    draw: 'text-yellow-600'
 }
 
-const getResultText = (result: string) => {
-    if (result === 'win') return 'Won'
-    if (result === 'lose') return 'Lost'
-    return 'Draw'
+const resultTexts: Record<GameResult, string> = {
+    win: 'Won',
+    lose: 'Lost',
+    draw: 'Draw'
 }
 
 export const GameHistory = () => {
@@ -61,8 +61,8 @@ export const GameHistory = () => {
                                 />
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className={`text-sm font-medium ${getResultColor(game.result)}`}>
-                                    {getResultText(game.result)}
+                                <span className={`text-sm font-medium ${resultColors[game.result]}`}>
+                                    {resultTexts[game.result]}
                                 </span>
                                 <span className="text-xs text-gray-400">
                                     {game.timestamp.toLocaleTimeString()}
