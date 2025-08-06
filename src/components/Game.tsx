@@ -18,6 +18,13 @@ const choiceColors = {
     scissors: 'bg-green-500 hover:bg-green-600'
 }
 
+const resultTexts = {
+    win: 'You win! 🎉',
+    lose: 'Computer wins! 😔',
+    draw: "It's a draw! 🤝",
+    default: 'Choose your weapon!'
+}
+
 export const Game = () => {
     const {
         playerChoice,
@@ -26,17 +33,6 @@ export const Game = () => {
         makeChoice,
         resetGame
     } = useGameStore()
-
-    const handleChoice = (choice: Choice) => {
-        makeChoice(choice)
-    }
-
-    const resultTexts = {
-        win: 'You win! 🎉',
-        lose: 'Computer wins! 😔',
-        draw: "It's a draw! 🤝",
-        default: 'Choose your weapon!'
-    }
 
     return (
         <div className="space-y-6 max-w-md mx-auto">
@@ -96,7 +92,7 @@ export const Game = () => {
                         <div className="relative w-48 h-40">
                             {/* Rock - Top */}
                             <Button
-                                onClick={() => handleChoice('rock')}
+                                onClick={() => makeChoice('rock')}
                                 className={`${choiceColors.rock} text-white absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform`}
                                 size="lg"
                             >
@@ -109,7 +105,7 @@ export const Game = () => {
 
                             {/* Paper - Bottom Left */}
                             <Button
-                                onClick={() => handleChoice('paper')}
+                                onClick={() => makeChoice('paper')}
                                 className={`${choiceColors.paper} text-white absolute bottom-2 left-4 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform`}
                                 size="lg"
                             >
@@ -122,7 +118,7 @@ export const Game = () => {
 
                             {/* Scissors - Bottom Right */}
                             <Button
-                                onClick={() => handleChoice('scissors')}
+                                onClick={() => makeChoice('scissors')}
                                 className={`${choiceColors.scissors} text-white absolute bottom-2 right-4 w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform`}
                                 size="lg"
                             >

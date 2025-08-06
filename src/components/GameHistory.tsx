@@ -27,7 +27,7 @@ export const GameHistory = () => {
 
     if (gameHistory.length === 0) {
         return (
-            <Card>
+            <Card className="max-w-md mx-auto">
                 <CardHeader>
                     <CardTitle className="text-center">Game History</CardTitle>
                 </CardHeader>
