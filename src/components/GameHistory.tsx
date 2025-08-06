@@ -1,11 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { useGameStore } from '../store/gameStore'
-import { Hand, Scissors, Square } from 'lucide-react'
+import rockIcon from '../assets/rock.svg'
+import paperIcon from '../assets/paper.svg'
+import scissorsIcon from '../assets/scissors.svg'
 
 const choiceIcons = {
-    rock: Hand,
-    paper: Square,
-    scissors: Scissors
+    rock: rockIcon,
+    paper: paperIcon,
+    scissors: scissorsIcon
 }
 
 const getResultColor = (result: string) => {
@@ -43,28 +45,31 @@ export const GameHistory = () => {
             </CardHeader>
             <CardContent>
                 <div className="space-y-3 max-h-64 overflow-y-auto">
-                    {gameHistory.slice(0, 10).map((game, index) => {
-                        const PlayerIcon = choiceIcons[game.playerChoice]
-                        const ComputerIcon = choiceIcons[game.computerChoice]
-
-                        return (
-                            <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <div className="flex items-center gap-3">
-                                    <PlayerIcon className="w-5 h-5 text-blue-600" />
-                                    <span className="text-sm">vs</span>
-                                    <ComputerIcon className="w-5 h-5 text-red-600" />
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className={`text-sm font-medium ${getResultColor(game.result)}`}>
-                                        {getResultText(game.result)}
-                                    </span>
-                                    <span className="text-xs text-gray-500">
-                                        {game.timestamp.toLocaleTimeString()}
-                                    </span>
-                                </div>
+                    {gameHistory.slice(0, 10).map((game, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div className="flex items-center gap-3">
+                                <img
+                                    src={choiceIcons[game.playerChoice]}
+                                    alt={game.playerChoice}
+                                    className="w-5 h-5"
+                                />
+                                <span className="text-sm">vs</span>
+                                <img
+                                    src={choiceIcons[game.computerChoice]}
+                                    alt={game.computerChoice}
+                                    className="w-5 h-5"
+                                />
                             </div>
-                        )
-                    })}
+                            <div className="flex items-center gap-2">
+                                <span className={`text-sm font-medium ${getResultColor(game.result)}`}>
+                                    {getResultText(game.result)}
+                                </span>
+                                <span className="text-xs text-gray-500">
+                                    {game.timestamp.toLocaleTimeString()}
+                                </span>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </CardContent>
         </Card>
