@@ -1,69 +1,70 @@
-# React + TypeScript + Vite
+# APC-FE-Assignment
+Home exercise assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Rock Paper Scissors – Shutterfly Hands-On Exercise
 
-Currently, two official plugins are available:
+Welcome to the hands-on exercise phase of **Shutterfly**!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+In this exercise, you are required to build a **web application interface** for a digital version of the classic game **Rock, Paper, Scissors**.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🕒 Estimated Time
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+~2 hours  
+> It's okay if you don't meet **all** requirements within this time frame. It's always better to submit a working version with partial features than a broken or incomplete app.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🎮 Game Description
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- The game is a **single-player** experience against the **computer**.
+- The player will select one of the options: **Rock**, **Paper**, or **Scissors**.
+- The computer will **randomly** select its option.
+- After both choices are revealed:
+  - The system will determine and display the **winner**.
+  - Rules:
+    - Rock beats Scissors
+    - Scissors beats Paper
+    - Paper beats Rock
+- The result will be shown as:  
+  🟢 _You Win_ | 🔴 _You Lose_ | ⚪ _Tie_
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🧮 Scoreboard
+
+- A **score counter** will be displayed:
+  - 1 counter for the **player**
+  - 1 counter for the **computer**
+- On each win:
+  - The winner's counter increases by 1
+- There should be an option to **reset** the counters.
+
+---
+
+## ✅ Requirements
+
+- [x] Display player selection options (Rock / Paper / Scissors)
+- [x] Display a scoreboard with counters
+- [x] Show the result of each round
+- [x] Implement the UI using the **React** library
+- [x] Use any **icon library** of your choice
+
+> 💡 The attached UI is for illustration only and is **not binding**
+
+---
+
+## 🌟 Bonus Features
+
+### Bonus 1: Two-Player Mode
+- Add the ability to play **player vs. player**, not just vs. computer
+
+### Bonus 2: Server-Side Implementation
+- Move the game logic to a **server-side implementation**
+- You can use **any language** for the backend
+
+---
+
+## 🚀 Good Luck!
+Have fun and show off your React and design skills!
