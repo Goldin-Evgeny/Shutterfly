@@ -4,7 +4,7 @@ import { useGameStore, type Choice } from '../store/gameStore'
 import rockIcon from '../assets/rock.svg'
 import paperIcon from '../assets/paper.svg'
 import scissorsIcon from '../assets/scissors.svg'
-import SplitText from './SplitText'
+import { ComicText } from '../components/magicui/comic-text'
 
 const choiceIcons = {
     rock: rockIcon,
@@ -40,16 +40,17 @@ export const Game = () => {
             <Card className="min-h-[200px]">
                 <CardHeader>
                     <CardTitle className="text-center text-xl">
-                        <SplitText
-                            key={result}
-                            text={resultTexts[result as keyof typeof resultTexts] || resultTexts.default}
-                            className="text-2xl font-bold"
-                            delay={50}
-                            duration={0.8}
-                            splitType="chars"
-                            from={{ opacity: 0, y: 30, scale: 0.8 }}
-                            to={{ opacity: 1, y: 0, scale: 1 }}
-                        />
+                        {result ? (
+                            <ComicText
+                                className="text-2xl"
+                                fontSize={2}
+                                key={result}
+                            >
+                                {resultTexts[result as keyof typeof resultTexts] || resultTexts.default}
+                            </ComicText>
+                        ) : (
+                            resultTexts.default
+                        )}
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
