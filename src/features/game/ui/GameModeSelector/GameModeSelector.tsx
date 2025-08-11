@@ -14,35 +14,31 @@ export const GameModeSelector = () => {
 
   return (
     <div className={styles.card}>
-      <div>
-        <h3>Select Game Mode</h3>
+      <h3>Select Game Mode</h3>
+      <div className={styles.buttonContainer}>
+        <Button
+          onClick={() => handleModeChange('pve')}
+          variant={mode === 'pve' ? 'outline' : 'default'}
+          className={styles.button}
+          size="sm"
+        >
+          PvE
+        </Button>
+
+        <Button
+          onClick={() => handleModeChange('pvp')}
+          variant={mode === 'pvp' ? 'outline' : 'default'}
+          className={styles.button}
+          size="sm"
+        >
+          PvP
+        </Button>
       </div>
-      <div>
-        <div className={styles.buttonContainer}>
-          <Button
-            onClick={() => handleModeChange('pve')}
-            variant={mode === 'pve' ? 'outline' : 'default'}
-            className={styles.button}
-            size="sm"
-          >
-            PvE
-          </Button>
 
-          <Button
-            onClick={() => handleModeChange('pvp')}
-            variant={mode === 'pvp' ? 'outline' : 'default'}
-            className={styles.button}
-            size="sm"
-          >
-            PvP
-          </Button>
-        </div>
-
-        <div className={styles.startButtonContainer}>
-          <Button onClick={handleStartGame} disabled={!mode} size="sm">
-            Start Game
-          </Button>
-        </div>
+      <div className={styles.startButtonContainer}>
+        <Button onClick={handleStartGame} disabled={!mode} size="sm">
+          Start Game
+        </Button>
       </div>
     </div>
   );

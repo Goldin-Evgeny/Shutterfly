@@ -14,7 +14,7 @@ function App() {
   const resetAll = useGameStore(s => s.resetAll);
 
   const handleBackToMenu = () => {
-    resetAll(); // This will reset everything including gameStarted to false
+    resetAll();
   };
 
   if (!gameStarted) {
@@ -34,40 +34,27 @@ function App() {
           <h1>Rock, Paper, Scissors</h1>
         )}
         {gameStarted && (
-          /* Game Screen */
+          <div className={styles.menuButtonContainer}>
+            <Button onClick={handleBackToMenu} type="button" size="sm">
+              ← Back
+            </Button>
+          </div>
+        )}
+        {!gameStarted && (
+          <GameModeSelector />
+        )}
+
+        {gameStarted && (
           <>
-            {/* Back to Menu Button */}
-            <div className={styles.menuButtonContainer}>
-              <Button onClick={handleBackToMenu} type="button" size="sm">
-                ← Back
-              </Button>
+            <Scoreboard />
+            <div className={styles.gameWrapper}>
+              <Game />
+            </div>
+            <div className={styles.gameHistory}>
+              <GameHistory />
             </div>
           </>
         )}
-        <div>
-          <div>
-            {!gameStarted && (
-              /* Game Mode Selection Screen */
-              <GameModeSelector />
-            )}
-          </div>
-
-          {/* Game History - only show when game has started */}
-          {gameStarted && (
-            <>
-              {/* Scoreboard */}
-              <Scoreboard />
-
-              {/* Game */}
-              <div className={styles.gameWrapper}>
-                <Game />
-              </div>
-              <div className={styles.gameHistory}>
-                <GameHistory />
-              </div>
-            </>
-          )}
-        </div>
       </div>
     </div>
   );

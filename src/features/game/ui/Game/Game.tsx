@@ -73,24 +73,22 @@ export const Game = () => {
     <div className={styles.container}>
       <div className={styles.gameCard}>
         <div className={styles.gameTitle}>{headline}</div>
-        <div>
-          <div className={styles.choicesContainer}>
-            <div className={styles.playerChoice}>
-              <div className={styles.playerLabel}>Player 1</div>
-              {renderChoiceButtons(p1, choose, Boolean(p1))}
+        <div className={styles.choicesContainer}>
+          <div className={styles.playerChoice}>
+            <div className={styles.playerLabel}>Player 1</div>
+            {renderChoiceButtons(p1, choose, Boolean(p1))}
+          </div>
+          <div className={styles.playerChoice}>
+            <div className={styles.playerLabel}>
+              {mode === 'pve' ? 'Computer' : 'Player 2'}
             </div>
-            <div className={styles.playerChoice}>
-              <div className={styles.playerLabel}>
-                {mode === 'pve' ? 'Computer' : 'Player 2'}
-              </div>
-              {renderChoiceButtons(
-                p2,
-                choose,
-                Boolean(p2),
-                mode === 'pve',
-                mode === 'pvp'
-              )}
-            </div>
+            {renderChoiceButtons(
+              p2,
+              choose,
+              Boolean(p2),
+              mode === 'pve',
+              mode === 'pvp'
+            )}
           </div>
         </div>
       </div>
