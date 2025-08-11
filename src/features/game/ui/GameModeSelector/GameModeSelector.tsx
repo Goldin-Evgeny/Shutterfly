@@ -1,5 +1,3 @@
-// features/game/ui/GameModeSelector.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card/Card';
 import { Button } from '@/components/ui/button';
 import { useGameStore } from '../../model/store';
 import type { GameMode } from '../../model/types';
@@ -15,30 +13,30 @@ export const GameModeSelector = () => {
   const handleStartGame = () => startGame();
 
   return (
-    <Card className={styles.card}>
-      <CardHeader>
-        <CardTitle className={styles.title}>
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <h3 className={styles.title}>
           Select Game Mode
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+        </h3>
+      </div>
+      <div className={styles.content}>
         <div className={styles.buttonContainer}>
           <Button
             onClick={() => handleModeChange('pve')}
-            variant={mode === 'pve' ? 'default' : 'outline'}
+            variant={mode === 'pve' ? 'outline' : 'default'}
             className={styles.button}
             size="sm"
           >
-            Player vs Computer
+            PvE
           </Button>
 
           <Button
             onClick={() => handleModeChange('pvp')}
-            variant={mode === 'pvp' ? 'default' : 'outline'}
+            variant={mode === 'pvp' ? 'outline' : 'default'}
             className={styles.button}
             size="sm"
           >
-            Player vs Player
+            PvP
           </Button>
         </div>
 
@@ -51,7 +49,7 @@ export const GameModeSelector = () => {
             Start Game
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

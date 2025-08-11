@@ -1,5 +1,4 @@
 // features/game/ui/GameHistory.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card/Card';
 import rockIcon from '../../assets/rock.svg';
 import paperIcon from '../../assets/paper.svg';
 import scissorsIcon from '../../assets/scissors.svg';
@@ -36,23 +35,23 @@ export const GameHistory = () => {
 
   if (!hasHistory) {
     return (
-      <Card className={styles.gameHistoryCard}>
-        <CardHeader>
-          <CardTitle className={styles.gameHistoryHeader}>Game History</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className={styles.gameHistoryCard}>
+        <div className={styles.gameHistoryHeader}>
+          <h3>Game History</h3>
+        </div>
+        <div>
           <p className={styles.gameHistoryContent}>No games played yet</p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card className={styles.gameHistoryCard}>
-      <CardHeader>
-        <CardTitle className={styles.gameHistoryHeader}>Recent Games</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div className={styles.gameHistoryCard}>
+      <div className={styles.gameHistoryHeader}>
+        <h3>Recent Games</h3>
+      </div>
+      <div>
         <div className={styles.historyContainer}>
           {history.map(game => (
             <div
@@ -92,7 +91,7 @@ export const GameHistory = () => {
             </div>
           ))}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

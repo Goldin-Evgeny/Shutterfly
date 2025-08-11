@@ -1,6 +1,3 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card/Card';
-import { ComicText } from '@/components/ui/comicText';
-import buttonStyles from '@/components/ui/button/Button.module.css';
 import styles from './Game.module.css';
 
 import rockIcon from '../../assets/rock.svg';
@@ -11,9 +8,7 @@ import { useGameStore } from '../../model/store';
 import {
   useMode,
   useRound,
-  useWinner,
   useCanMakeChoice,
-  useTurnText,
   useHeadline,
   useIsRoundComplete,
 } from '../../model/selectors';
@@ -27,88 +22,62 @@ const choiceIcons: Record<Choice, string> = {
 };
 
 const choiceColors: Record<Choice, string> = {
-  rock: buttonStyles.rock,
-  paper: buttonStyles.paper,
-  scissors: buttonStyles.scissors,
+  rock: styles.rock,
+  paper: styles.paper,
+  scissors: styles.scissors,
 };
 
 export const Game = () => {
   const mode = useMode();
   const { p1, p2 } = useRound();
-  const winner = useWinner();
   const canMakeChoice = useCanMakeChoice();
-  const turnText = useTurnText();
   const headline = useHeadline();
   const isRoundComplete = useIsRoundComplete();
 
   const choose = useGameStore(s => s.choose);
   const resetRound = useGameStore(s => s.resetRound);
 
-  const shouldShowP1Choice =
-    mode === 'pve'
-      ? Boolean(p1)
-      : Boolean(p1) && (Boolean(p2) || isRoundComplete);
+  const renderChoiceButtons = (playerChoice: Choice | null, onChoice: (choice: Choice) => void, isLocked: boolean, isComputer: boolean = false, isPlayer2: boolean = false) => (
+    <div className={styles.choiceButtonsContainer}>
+      <div className={styles.choiceContainer}>
+        {(['rock', 'paper', 'scissors'] as const).map(c => (
+          <button
+            key={c}
+            onClick={() => onChoice(c)}
+            disabled={isLocked || !canMakeChoice || isComputer || (isPlayer2 && !p1)}
+            className={`${styles.choiceButton} ${choiceColors[c]} ${styles[c]} ${isLocked ? styles.choiceButtonLocked : ''
+              } ${playerChoice === c ? styles.choiceButtonSelected : ''
+              }`}
+            type="button"
+          >
+            <img src={choiceIcons[c]} alt={c} className={styles.choiceIconSmall} />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <div className={styles.container}>
-      <Card className={styles.gameCard}>
-        <CardHeader>
-          <CardTitle className={styles.gameTitle}>
-            {winner ? (
-              <ComicText className={styles.comicText} fontSize={2} key={winner}>
-                {headline}
-              </ComicText>
-            ) : (
-              headline
-            )}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className={styles.gameCard}>
+        <div className={styles.gameTitle}>
+          {headline}
+        </div>
+        <div>
           <div className={styles.choicesContainer}>
             <div className={styles.playerChoice}>
               <div className={styles.playerLabel}>Player 1</div>
-              {shouldShowP1Choice && p1 && (
-                <div className={styles.choiceIcon}>
-                  <img src={choiceIcons[p1]} alt={p1} className={styles.choiceIconLarge} />
-                </div>
-              )}
+              {renderChoiceButtons(p1, choose, Boolean(p1))}
             </div>
             <div className={styles.playerChoice}>
               <div className={styles.playerLabel}>
                 {mode === 'pve' ? 'Computer' : 'Player 2'}
               </div>
-              {p2 && (
-                <div className={styles.choiceIcon}>
-                  <img src={choiceIcons[p2]} alt={p2} className={styles.choiceIconLarge} />
-                </div>
-              )}
+              {renderChoiceButtons(p2, choose, Boolean(p2), mode === 'pve', mode === 'pvp')}
             </div>
           </div>
-        </CardContent>
-      </Card>
-
-      <Card className={styles.turnCard}>
-        <CardHeader>
-          <CardTitle className={styles.turnTitle}>{turnText}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className={styles.choiceButtonsContainer}>
-            <div className={buttonStyles.choiceContainer}>
-              {(['rock', 'paper', 'scissors'] as const).map(c => (
-                <button
-                  key={c}
-                  onClick={() => choose(c)}
-                  disabled={!canMakeChoice}
-                  className={`${buttonStyles.choiceButton} ${choiceColors[c]} ${buttonStyles[c]}`}
-                  type="button"
-                >
-                  <img src={choiceIcons[c]} alt={c} className={styles.choiceIconSmall} />
-                </button>
-              ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {(isRoundComplete || p1 || p2) && (
         <div className={styles.playAgainContainer}>

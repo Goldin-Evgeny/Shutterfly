@@ -1,9 +1,6 @@
 .container {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  max-width: 28rem;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .gameCard {
@@ -14,6 +11,7 @@
   text-align: center;
   font-size: 1.25rem;
   line-height: 1.75rem;
+  padding-bottom: 1rem;
 }
 
 .comicText {
@@ -23,9 +21,56 @@
 
 .choicesContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
+}
+
+/* Responsive adjustments for choices container */
+@media (max-width: 768px) {
+  .choicesContainer {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .choicesContainer {
+    gap: 1rem;
+  }
+}
+
+/* Game-specific colors for Rock Paper Scissors */
+.rock {
+  background-color: #f97316;
+  color: white;
+}
+
+.rock:hover {
+  background-color: #ea580c;
+}
+
+.paper {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.paper:hover {
+  background-color: #2563eb;
+}
+
+.scissors {
+  background-color: #22c55e;
+  color: white;
+}
+
+.scissors:hover {
+  background-color: #16a34a;
+}
+
+@media (max-width: 480px) {
+  .choicesContainer {
+    gap: 0.75rem;
+  }
 }
 
 .playerChoice {
@@ -59,6 +104,37 @@
   width: 3rem;
 }
 
+/* Responsive icon sizing */
+@media (max-width: 768px) {
+  .choiceIconSmall {
+    width: 1.75rem;
+  }
+  
+  .choiceIconLarge {
+    width: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .choiceIconSmall {
+    width: 1.5rem;
+  }
+  
+  .choiceIconLarge {
+    width: 2.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .choiceIconSmall {
+    width: 1.25rem;
+  }
+  
+  .choiceIconLarge {
+    width: 2rem;
+  }
+}
+
 .turnTitle {
   text-align: center;
 }
@@ -71,4 +147,198 @@
 .playAgainContainer {
   display: flex;
   justify-content: center;
+}
+
+/* Locked state styles */
+.choiceButtonLocked::after {
+  content: '🔒';
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  font-size: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lockPulse 2s ease-in-out infinite;
+}
+
+@keyframes lockPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.icon {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.choiceButtonSelected {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  animation: selectedGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes selectedGlow {
+  from {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  }
+  to {
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.8);
+  }
+}
+
+/* Choice container and buttons for Rock Paper Scissors game */
+.choiceContainer {
+  position: relative;
+  width: 12rem;
+  height: 10rem;
+}
+
+.choiceButton {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  font-size: 1rem;
+}
+
+/* Responsive sizing for choice buttons */
+@media (max-width: 768px) {
+  .choiceContainer {
+    width: 10rem;
+    height: 8rem;
+  }
+  
+  .choiceButton {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .choiceContainer {
+    width: 9rem;
+    height: 7.5rem;
+  }
+  
+  .choiceButton {
+    width: 3rem;
+    height: 3rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .choiceContainer {
+    width: 7rem;
+    height: 6rem;
+  }
+  
+  .choiceButton {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.625rem;
+  }
+}
+
+.choiceButton:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.choiceButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.choiceButton:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Position the buttons in a triangle pattern */
+.choiceButton.rock {
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.choiceButton.rock:hover:not(:disabled) {
+  transform: translateX(-50%) scale(1.1);
+}
+
+.choiceButton.paper {
+  bottom: 0.5rem;
+  left: 1rem;
+}
+
+.choiceButton.scissors {
+  bottom: 0.5rem;
+  right: 1rem;
+}
+
+/* Responsive positioning adjustments */
+@media (max-width: 768px) {
+  .choiceButton.rock {
+    top: 0.25rem;
+  }
+  
+  .choiceButton.paper {
+    bottom: 0.25rem;
+    left: 0.75rem;
+  }
+  
+  .choiceButton.scissors {
+    bottom: 0.25rem;
+    right: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .choiceButton.rock {
+    top: 0.5rem;
+  }
+  
+  .choiceButton.paper {
+    bottom: 0.5rem;
+    left: 0.75rem;
+  }
+  
+  .choiceButton.scissors {
+    bottom: 0.5rem;
+    right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .choiceButton.rock {
+    top: 0.75rem;
+  }
+  
+  .choiceButton.paper {
+    bottom: 0.75rem;
+    left: 0.5rem;
+  }
+  
+  .choiceButton.scissors {
+    bottom: 0.75rem;
+    right: 0.5rem;
+  }
 }

@@ -2,6 +2,7 @@
   width: 100%;
   max-width: 28rem;
   margin: 0 auto;
+  padding-bottom: 2rem;
 }
 
 .scoreboardHeader {
@@ -31,13 +32,13 @@
 .player1Score {
   font-size: 1.875rem;
   font-weight: bold;
-  color: #2563eb;
+  color: #15b600;
 }
 
 .player2Score {
   font-size: 1.875rem;
   font-weight: bold;
-  color: #dc2626;
+  color: #db4d4d;
 }
 
 .playerLabel {

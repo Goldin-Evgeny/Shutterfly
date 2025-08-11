@@ -1,5 +1,4 @@
 // features/game/ui/Scoreboard.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card/Card';
 import { Button } from '@/components/ui/button';
 import { RotateCcw } from 'lucide-react';
 
@@ -13,13 +12,11 @@ export const Scoreboard = () => {
   const resetScores = useGameStore(s => s.resetScores);
 
   return (
-    <Card className={styles.scoreboardCard}>
-      <CardHeader>
-        <CardTitle className={styles.scoreboardHeader}>
-          Scoreboard
-        </CardTitle>
-      </CardHeader>
-      <CardContent className={styles.scoreboardContent}>
+    <div className={styles.scoreboardCard}>
+      <div className={styles.scoreboardHeader}>
+        <h3>Scoreboard</h3>
+      </div>
+      <div className={styles.scoreboardContent}>
         <div className={styles.scoresContainer}>
           <div className={styles.playerScore}>
             <div className={styles.player1Score}>{p1}</div>
@@ -37,7 +34,7 @@ export const Scoreboard = () => {
         <div className={styles.resetButtonContainer}>
           <Button
             onClick={resetScores}
-            variant="outline"
+            variant="default"
             size="sm"
             className={styles.resetButton}
           >
@@ -45,7 +42,7 @@ export const Scoreboard = () => {
             Reset Scores
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

@@ -8,6 +8,7 @@ import { useGameStarted } from '@/features/game/model/selectors';
 import { useGameStore } from '@/features/game/model/store';
 import styles from './App.module.css';
 import { Button } from './components/ui/button';
+import { Card } from './components/ui/card';
 
 function App() {
   const gameStarted = useGameStarted();
@@ -17,31 +18,47 @@ function App() {
     resetAll(); // This will reset everything including gameStarted to false
   };
 
+  if (!gameStarted) {
+    return <div className={styles.app}>
+      <div className={styles.container}>
+        <GameModeSelector />
+      </div>
+    </div>;
+  }
+
   return (
     <div className={styles.app}>
       <div className={styles.container}>
-        <h1 className={styles.title}>
+        {!gameStarted && <h1 className={styles.title}>
           Rock, Paper, Scissors
-        </h1>
+        </h1>}
+        {gameStarted && (
+          /* Game Screen */
+          <>
+            {/* Back to Menu Button */}
+            <div className={styles.menuButtonContainer}>
+              <Button
+                onClick={handleBackToMenu}
+                type="button"
+                size="sm"
+              >
+                ← Back
+              </Button>
+            </div>
+          </>
+        )}
+        <div>
+          <div className={styles.content}>
+            {!gameStarted && (
+              /* Game Mode Selection Screen */
+              <GameModeSelector />
+            )}
+          </div>
 
-        <div className={styles.content}>
-          {!gameStarted ? (
-            /* Game Mode Selection Screen */
-            <GameModeSelector />
-          ) : (
-            /* Game Screen */
+          {/* Game History - only show when game has started */}
+          {gameStarted && (
             <>
-              {/* Back to Menu Button */}
-              <div className={styles.menuButtonContainer}>
-                <Button
-                  onClick={handleBackToMenu}
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                >
-                  ← Back to Menu
-                </Button>
-              </div>
+
 
               {/* Scoreboard */}
               <Scoreboard />
@@ -50,16 +67,12 @@ function App() {
               <div className={styles.gameWrapper}>
                 <Game />
               </div>
+              <div className={styles.gameHistory}>
+                <GameHistory />
+              </div>
             </>
           )}
         </div>
-
-        {/* Game History - only show when game has started */}
-        {gameStarted && (
-          <div className={styles.gameHistory}>
-            <GameHistory />
-          </div>
-        )}
       </div>
     </div>
   );
