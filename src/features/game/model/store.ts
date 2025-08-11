@@ -95,7 +95,7 @@ export const useGameStore = create<GameState & GameActions>()(
 
         resetRound: () =>
           set({ p1Choice: null, p2Choice: null, current: null }),
-        
+
         resetScores: () =>
           set({
             p1Score: 0,
@@ -105,7 +105,7 @@ export const useGameStore = create<GameState & GameActions>()(
             p2Choice: null,
             current: null,
           }),
-        
+
         resetAll: () =>
           set({
             p1Score: 0,

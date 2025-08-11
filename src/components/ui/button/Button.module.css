@@ -20,8 +20,8 @@
 /* Variants */
 .default {
   background-color: transparent;
-  color: #EDEADE;
-  border: 1px solid #EDEADE;
+  color: #edeade;
+  border: 1px solid #edeade;
 }
 
 .default:hover {

@@ -37,20 +37,32 @@ export const Game = () => {
   const choose = useGameStore(s => s.choose);
   const resetRound = useGameStore(s => s.resetRound);
 
-  const renderChoiceButtons = (playerChoice: Choice | null, onChoice: (choice: Choice) => void, isLocked: boolean, isComputer: boolean = false, isPlayer2: boolean = false) => (
+  const renderChoiceButtons = (
+    playerChoice: Choice | null,
+    onChoice: (choice: Choice) => void,
+    isLocked: boolean,
+    isComputer: boolean = false,
+    isPlayer2: boolean = false
+  ) => (
     <div className={styles.choiceButtonsContainer}>
       <div className={styles.choiceContainer}>
         {(['rock', 'paper', 'scissors'] as const).map(c => (
           <button
             key={c}
             onClick={() => onChoice(c)}
-            disabled={isLocked || !canMakeChoice || isComputer || (isPlayer2 && !p1)}
-            className={`${styles.choiceButton} ${choiceColors[c]} ${styles[c]} ${isLocked ? styles.choiceButtonLocked : ''
-              } ${playerChoice === c ? styles.choiceButtonSelected : ''
-              }`}
+            disabled={
+              isLocked || !canMakeChoice || isComputer || (isPlayer2 && !p1)
+            }
+            className={`${styles.choiceButton} ${choiceColors[c]} ${styles[c]} ${
+              isLocked ? styles.choiceButtonLocked : ''
+            } ${playerChoice === c ? styles.choiceButtonSelected : ''}`}
             type="button"
           >
-            <img src={choiceIcons[c]} alt={c} className={styles.choiceIconSmall} />
+            <img
+              src={choiceIcons[c]}
+              alt={c}
+              className={styles.choiceIconSmall}
+            />
           </button>
         ))}
       </div>
@@ -60,9 +72,7 @@ export const Game = () => {
   return (
     <div className={styles.container}>
       <div className={styles.gameCard}>
-        <div className={styles.gameTitle}>
-          {headline}
-        </div>
+        <div className={styles.gameTitle}>{headline}</div>
         <div>
           <div className={styles.choicesContainer}>
             <div className={styles.playerChoice}>
@@ -73,7 +83,13 @@ export const Game = () => {
               <div className={styles.playerLabel}>
                 {mode === 'pve' ? 'Computer' : 'Player 2'}
               </div>
-              {renderChoiceButtons(p2, choose, Boolean(p2), mode === 'pve', mode === 'pvp')}
+              {renderChoiceButtons(
+                p2,
+                choose,
+                Boolean(p2),
+                mode === 'pve',
+                mode === 'pvp'
+              )}
             </div>
           </div>
         </div>
@@ -81,11 +97,7 @@ export const Game = () => {
 
       {(isRoundComplete || p1 || p2) && (
         <div className={styles.playAgainContainer}>
-          <Button
-            onClick={resetRound}
-            type="button"
-            size="sm"
-          >
+          <Button onClick={resetRound} type="button" size="sm">
             Play Again
           </Button>
         </div>

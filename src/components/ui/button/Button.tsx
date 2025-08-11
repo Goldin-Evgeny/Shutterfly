@@ -5,12 +5,21 @@ import classNames from './Button.module.css';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   asChild?: boolean;
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+  variant?:
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link';
   size?: 'default' | 'sm' | 'lg' | 'icon';
-}
+};
 
 // Helper function to build class names
-const buildButtonClasses = (variant: string = 'default', size: string = 'default') => {
+const buildButtonClasses = (
+  variant: string = 'default',
+  size: string = 'default'
+) => {
   const classes = [classNames.button];
   // Add variant class
   if (variant) {

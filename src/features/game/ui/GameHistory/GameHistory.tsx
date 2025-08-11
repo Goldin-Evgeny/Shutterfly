@@ -54,10 +54,7 @@ export const GameHistory = () => {
       <div>
         <div className={styles.historyContainer}>
           {history.map(game => (
-            <div
-              key={game.id}
-              className={styles.gameItem}
-            >
+            <div key={game.id} className={styles.gameItem}>
               <div className={styles.gameChoices}>
                 <div className={styles.choiceContainer}>
                   <img
@@ -81,7 +78,9 @@ export const GameHistory = () => {
               </div>
 
               <div className={styles.gameResult}>
-                <span className={`${styles.resultText} ${colorForWinner(game.winner)}`}>
+                <span
+                  className={`${styles.resultText} ${colorForWinner(game.winner)}`}
+                >
                   {textForWinner(game.winner)}
                 </span>
                 <span className={styles.gameTime}>

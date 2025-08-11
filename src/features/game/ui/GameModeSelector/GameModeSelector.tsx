@@ -15,9 +15,7 @@ export const GameModeSelector = () => {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <h3 className={styles.title}>
-          Select Game Mode
-        </h3>
+        <h3 className={styles.title}>Select Game Mode</h3>
       </div>
       <div className={styles.content}>
         <div className={styles.buttonContainer}>
@@ -41,11 +39,7 @@ export const GameModeSelector = () => {
         </div>
 
         <div className={styles.startButtonContainer}>
-          <Button
-            onClick={handleStartGame}
-            disabled={!mode}
-            size="sm"
-          >
+          <Button onClick={handleStartGame} disabled={!mode} size="sm">
             Start Game
           </Button>
         </div>
