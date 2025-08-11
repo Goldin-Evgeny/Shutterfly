@@ -46,6 +46,12 @@
 }
 
 @layer base {
+  html {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
   * {
     border-color: var(--border);
   }
@@ -55,6 +61,9 @@
     color: var(--foreground);
     margin: 0;
     padding: 0;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
     font-family:
       system-ui,
       -apple-system,
