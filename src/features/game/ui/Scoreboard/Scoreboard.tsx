@@ -10,7 +10,7 @@ import styles from './Scoreboard.module.css';
 export const Scoreboard = () => {
   const mode = useMode();
   const { p1, p2 } = useScores(); // derived from store: { p1Score, p2Score }
-  const resetAll = useGameStore(s => s.resetAll);
+  const resetScores = useGameStore(s => s.resetScores);
 
   return (
     <Card className={styles.scoreboardCard}>
@@ -36,7 +36,7 @@ export const Scoreboard = () => {
 
         <div className={styles.resetButtonContainer}>
           <Button
-            onClick={resetAll}
+            onClick={resetScores}
             variant="outline"
             size="sm"
             className={styles.resetButton}

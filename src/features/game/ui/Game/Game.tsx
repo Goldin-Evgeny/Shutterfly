@@ -18,6 +18,7 @@ import {
   useIsRoundComplete,
 } from '../../model/selectors';
 import type { Choice } from '../../model/types';
+import { Button } from '../../../../components/ui/button';
 
 const choiceIcons: Record<Choice, string> = {
   rock: rockIcon,
@@ -111,13 +112,13 @@ export const Game = () => {
 
       {(isRoundComplete || p1 || p2) && (
         <div className={styles.playAgainContainer}>
-          <button
+          <Button
             onClick={resetRound}
-            className={`${buttonStyles.button} ${buttonStyles.outline}`}
             type="button"
+            size="sm"
           >
             Play Again
-          </button>
+          </Button>
         </div>
       )}
     </div>

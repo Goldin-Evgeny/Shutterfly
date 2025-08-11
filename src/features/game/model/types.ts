@@ -14,6 +14,7 @@ export type Round = {
 
 export type GameState = {
   mode: GameMode;
+  gameStarted: boolean;
   p1Score: number;
   p2Score: number;
   p1Choice: Choice | null;
@@ -24,7 +25,9 @@ export type GameState = {
 
 export type GameActions = {
   setMode: (mode: GameMode) => void;
+  startGame: () => void;
   choose: (c: Choice) => void;
   resetRound: () => void;
+  resetScores: () => void;
   resetAll: () => void;
 };

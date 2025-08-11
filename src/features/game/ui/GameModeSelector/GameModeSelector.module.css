@@ -15,6 +15,7 @@
 .buttonContainer {
   display: flex;
   gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .button {
@@ -25,4 +26,9 @@
   gap: 0.5rem;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+
+.startButtonContainer {
+  display: flex;
+  justify-content: center;
 }

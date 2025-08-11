@@ -4,6 +4,7 @@ import type { Choice, Winner } from './types';
 import { useMemo } from 'react';
 
 export const useMode = () => useGameStore(s => s.mode);
+export const useGameStarted = () => useGameStore(s => s.gameStarted);
 
 // Separate selectors for individual values to avoid object recreation
 export const useP1Choice = () => useGameStore(s => s.p1Choice);

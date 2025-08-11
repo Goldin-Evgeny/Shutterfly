@@ -9,6 +9,7 @@ export const useGameStore = create<GameState & GameActions>()(
     persist(
       (set, get) => ({
         mode: 'pve',
+        gameStarted: false,
         p1Score: 0,
         p2Score: 0,
         p1Choice: null,
@@ -19,6 +20,15 @@ export const useGameStore = create<GameState & GameActions>()(
         setMode: (mode: GameMode) =>
           set(() => ({
             mode,
+            gameStarted: false,
+            p1Choice: null,
+            p2Choice: null,
+            current: null,
+          })),
+
+        startGame: () =>
+          set(() => ({
+            gameStarted: true,
             p1Choice: null,
             p2Choice: null,
             current: null,
@@ -85,11 +95,23 @@ export const useGameStore = create<GameState & GameActions>()(
 
         resetRound: () =>
           set({ p1Choice: null, p2Choice: null, current: null }),
+        
+        resetScores: () =>
+          set({
+            p1Score: 0,
+            p2Score: 0,
+            history: [],
+            p1Choice: null,
+            p2Choice: null,
+            current: null,
+          }),
+        
         resetAll: () =>
           set({
             p1Score: 0,
             p2Score: 0,
             history: [],
+            gameStarted: false,
             p1Choice: null,
             p2Choice: null,
             current: null,
