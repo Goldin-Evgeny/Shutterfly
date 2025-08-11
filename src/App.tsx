@@ -4,16 +4,17 @@ import {
   GameHistory,
   GameModeSelector,
 } from '@/features/game';
+import styles from './App.module.css';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-white mb-8">
+    <div className={styles.app}>
+      <div className={styles.container}>
+        <h1 className={styles.title}>
           Rock, Paper, Scissors
         </h1>
 
-        <div className="flex flex-col gap-4">
+        <div className={styles.content}>
           {/* Game Mode Selector */}
           <GameModeSelector />
 
@@ -21,13 +22,13 @@ function App() {
           <Scoreboard />
 
           {/* Game */}
-          <div>
+          <div className={styles.gameWrapper}>
             <Game />
           </div>
         </div>
 
         {/* Game History */}
-        <div className="mt-8">
+        <div className={styles.gameHistory}>
           <GameHistory />
         </div>
       </div>

@@ -1,0 +1,103 @@
+.gameHistoryCard {
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.gameHistoryHeader {
+  text-align: center;
+}
+
+.gameHistoryContent {
+  text-align: center;
+  color: #9ca3af;
+}
+
+.historyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 16rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #4b5563 #1f2937;
+  padding-right: 0.5rem;
+}
+
+.historyContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.historyContainer::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.historyContainer::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 3px;
+}
+
+.historyContainer:hover::-webkit-scrollbar-thumb {
+  background: #6b7280;
+}
+
+.gameItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background-color: #1f2937;
+  border-radius: 0.5rem;
+}
+
+.gameChoices {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.choiceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.choiceIcon {
+  width: 1.25rem;
+}
+
+.playerLabel {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.vsLabel {
+  font-size: 0.875rem;
+}
+
+.gameResult {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.resultText {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.resultTextWon {
+  color: #16a34a;
+}
+
+.resultTextLost {
+  color: #dc2626;
+}
+
+.resultTextDraw {
+  color: #ca8a04;
+}
+
+.gameTime {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}

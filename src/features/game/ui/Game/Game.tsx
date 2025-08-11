@@ -1,12 +1,13 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { ComicText } from '@/components/ui/ComicText';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card/Card';
+import { ComicText } from '@/components/ui/comicText';
 import buttonStyles from '@/components/ui/button/Button.module.css';
+import styles from './Game.module.css';
 
-import rockIcon from '../assets/rock.svg';
-import paperIcon from '../assets/paper.svg';
-import scissorsIcon from '../assets/scissors.svg';
+import rockIcon from '../../assets/rock.svg';
+import paperIcon from '../../assets/paper.svg';
+import scissorsIcon from '../../assets/scissors.svg';
 
-import { useGameStore } from '../model/store';
+import { useGameStore } from '../../model/store';
 import {
   useMode,
   useRound,
@@ -15,8 +16,8 @@ import {
   useTurnText,
   useHeadline,
   useIsRoundComplete,
-} from '../model/selectors';
-import type { Choice } from '../model/types';
+} from '../../model/selectors';
+import type { Choice } from '../../model/types';
 
 const choiceIcons: Record<Choice, string> = {
   rock: rockIcon,
@@ -48,12 +49,12 @@ export const Game = () => {
       : Boolean(p1) && (Boolean(p2) || isRoundComplete);
 
   return (
-    <div className="space-y-6 max-w-md mx-auto">
-      <Card className="min-h-[200px]">
+    <div className={styles.container}>
+      <Card className={styles.gameCard}>
         <CardHeader>
-          <CardTitle className="text-center text-xl">
+          <CardTitle className={styles.gameTitle}>
             {winner ? (
-              <ComicText className="text-2xl" fontSize={2} key={winner}>
+              <ComicText className={styles.comicText} fontSize={2} key={winner}>
                 {headline}
               </ComicText>
             ) : (
@@ -62,22 +63,22 @@ export const Game = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex justify-center items-start gap-8">
-            <div className="text-center flex flex-col items-center">
-              <div className="text-sm text-gray-300 mb-2">Player 1</div>
+          <div className={styles.choicesContainer}>
+            <div className={styles.playerChoice}>
+              <div className={styles.playerLabel}>Player 1</div>
               {shouldShowP1Choice && p1 && (
-                <div className="text-4xl min-h-16 flex items-center justify-center">
-                  <img src={choiceIcons[p1]} alt={p1} className="w-12" />
+                <div className={styles.choiceIcon}>
+                  <img src={choiceIcons[p1]} alt={p1} className={styles.choiceIconLarge} />
                 </div>
               )}
             </div>
-            <div className="text-center flex flex-col items-center">
-              <div className="text-sm text-gray-300 mb-2">
+            <div className={styles.playerChoice}>
+              <div className={styles.playerLabel}>
                 {mode === 'pve' ? 'Computer' : 'Player 2'}
               </div>
               {p2 && (
-                <div className="text-4xl min-h-16 flex items-center justify-center">
-                  <img src={choiceIcons[p2]} alt={p2} className="w-12" />
+                <div className={styles.choiceIcon}>
+                  <img src={choiceIcons[p2]} alt={p2} className={styles.choiceIconLarge} />
                 </div>
               )}
             </div>
@@ -85,12 +86,12 @@ export const Game = () => {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className={styles.turnCard}>
         <CardHeader>
-          <CardTitle className="text-center">{turnText}</CardTitle>
+          <CardTitle className={styles.turnTitle}>{turnText}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex justify-center">
+          <div className={styles.choiceButtonsContainer}>
             <div className={buttonStyles.choiceContainer}>
               {(['rock', 'paper', 'scissors'] as const).map(c => (
                 <button
@@ -100,7 +101,7 @@ export const Game = () => {
                   className={`${buttonStyles.choiceButton} ${choiceColors[c]} ${buttonStyles[c]}`}
                   type="button"
                 >
-                  <img src={choiceIcons[c]} alt={c} className="w-8" />
+                  <img src={choiceIcons[c]} alt={c} className={styles.choiceIconSmall} />
                 </button>
               ))}
             </div>
@@ -109,7 +110,7 @@ export const Game = () => {
       </Card>
 
       {(isRoundComplete || p1 || p2) && (
-        <div className="flex justify-center">
+        <div className={styles.playAgainContainer}>
           <button
             onClick={resetRound}
             className={`${buttonStyles.button} ${buttonStyles.outline}`}

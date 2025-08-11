@@ -1,3 +1,3 @@
 export * from './ui/button';
-export * from './ui/Card';
-export * from './ui/ComicText';
+export * from './ui/card/Card';
+export * from './ui/comicText';

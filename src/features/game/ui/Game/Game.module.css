@@ -1,0 +1,78 @@
+.container {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gameCard {
+  min-height: 200px;
+}
+
+.gameTitle {
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.comicText {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.choicesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.playerChoice {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.playerLabel {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #d1d5db;
+  margin-bottom: 0.5rem;
+}
+
+.choiceIcon {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.choiceIconSmall {
+  width: 2rem;
+}
+
+.choiceIconLarge {
+  width: 3rem;
+}
+
+.turnCard {
+  /* Additional styling for the turn card if needed */
+}
+
+.turnTitle {
+  text-align: center;
+}
+
+.choiceButtonsContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.playAgainContainer {
+  display: flex;
+  justify-content: center;
+}

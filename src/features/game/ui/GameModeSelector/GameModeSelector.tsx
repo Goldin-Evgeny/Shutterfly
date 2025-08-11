@@ -1,11 +1,10 @@
 // features/game/ui/GameModeSelector.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card/Card';
 import { Button } from '@/components/ui/button';
-import { Monitor, Users } from 'lucide-react';
-
-import { useGameStore } from '../model/store';
-import type { GameMode } from '../model/types';
-import { useMode } from '../model/selectors';
+import { useGameStore } from '../../model/store';
+import type { GameMode } from '../../model/types';
+import { useMode } from '../../model/selectors';
+import styles from './GameModeSelector.module.css';
 
 export const GameModeSelector = () => {
   const mode = useMode();
@@ -14,18 +13,18 @@ export const GameModeSelector = () => {
   const handleModeChange = (m: GameMode) => setMode(m);
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className={styles.card}>
       <CardHeader>
-        <CardTitle className="text-center text-xl text-white">
+        <CardTitle className={styles.title}>
           Select Game Mode
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex gap-4">
+        <div className={styles.buttonContainer}>
           <Button
             onClick={() => handleModeChange('pve')}
             variant={mode === 'pve' ? 'default' : 'outline'}
-            className="flex-1 flex flex-col items-center gap-2 py-6"
+            className={styles.button}
           >
             Player vs Computer
           </Button>
@@ -33,7 +32,7 @@ export const GameModeSelector = () => {
           <Button
             onClick={() => handleModeChange('pvp')}
             variant={mode === 'pvp' ? 'default' : 'outline'}
-            className="flex-1 flex flex-col items-center gap-2 py-6"
+            className={styles.button}
           >
             Player vs Player
           </Button>
