@@ -1,7 +1,7 @@
-import { Scoreboard } from './components/Scoreboard'
-import { Game } from './components/Game'
-import { GameHistory } from './components/GameHistory'
-import { GameModeSelector } from './components/GameModeSelector'
+import { Scoreboard } from './components/Scoreboard';
+import { Game } from './components/Game';
+import { GameHistory } from './components/GameHistory';
+import { GameModeSelector } from './components/GameModeSelector';
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

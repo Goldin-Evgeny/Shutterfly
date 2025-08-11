@@ -1,4 +1,5 @@
 # APC-FE-Assignment
+
 Home exercise assignment
 
 # Rock Paper Scissors – Shutterfly Hands-On Exercise
@@ -11,7 +12,8 @@ In this exercise, you are required to build a **web application interface** for 
 
 ## 🕒 Estimated Time
 
-~2 hours  
+~2 hours
+
 > It's okay if you don't meet **all** requirements within this time frame. It's always better to submit a working version with partial features than a broken or incomplete app.
 
 ---
@@ -58,13 +60,16 @@ In this exercise, you are required to build a **web application interface** for 
 ## 🌟 Bonus Features
 
 ### Bonus 1: Two-Player Mode
+
 - Add the ability to play **player vs. player**, not just vs. computer
 
 ### Bonus 2: Server-Side Implementation
+
 - Move the game logic to a **server-side implementation**
 - You can use **any language** for the backend
 
 ---
 
 ## 🚀 Good Luck!
+
 Have fun and show off your React and design skills!
