@@ -27,11 +27,7 @@ export const GameModeSelector = () => {
             variant={mode === 'pve' ? 'default' : 'outline'}
             className="flex-1 flex flex-col items-center gap-2 py-6"
           >
-            <Monitor className="h-6 w-6" />
-            <div>
-              <div className="font-semibold">Player vs Computer</div>
-              <div className="text-xs text-gray-300">Play against AI</div>
-            </div>
+            Player vs Computer
           </Button>
 
           <Button
@@ -39,13 +35,7 @@ export const GameModeSelector = () => {
             variant={mode === 'pvp' ? 'default' : 'outline'}
             className="flex-1 flex flex-col items-center gap-2 py-6"
           >
-            <Users className="h-6 w-6" />
-            <div>
-              <div className="font-semibold">Player vs Player</div>
-              <div className="text-xs text-gray-300">
-                Two players take turns
-              </div>
-            </div>
+            Player vs Player
           </Button>
         </div>
       </CardContent>

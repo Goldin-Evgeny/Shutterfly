@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Button } from '@/components/ui/button';
 import { ComicText } from '@/components/ui/ComicText';
+import buttonStyles from '@/components/ui/button/Button.module.css';
 
 import rockIcon from '../assets/rock.svg';
 import paperIcon from '../assets/paper.svg';
@@ -25,9 +25,9 @@ const choiceIcons: Record<Choice, string> = {
 };
 
 const choiceColors: Record<Choice, string> = {
-  rock: 'bg-orange-500 hover:bg-orange-600',
-  paper: 'bg-blue-500 hover:bg-blue-600',
-  scissors: 'bg-green-500 hover:bg-green-600',
+  rock: buttonStyles.rock,
+  paper: buttonStyles.paper,
+  scissors: buttonStyles.scissors,
 };
 
 export const Game = () => {
@@ -91,17 +91,17 @@ export const Game = () => {
         </CardHeader>
         <CardContent>
           <div className="flex justify-center">
-            <div className="relative w-48 h-40">
+            <div className={buttonStyles.choiceContainer}>
               {(['rock', 'paper', 'scissors'] as const).map(c => (
-                <Button
+                <button
                   key={c}
                   onClick={() => choose(c)}
                   disabled={!canMakeChoice}
-                  className={`${choiceColors[c]} text-white absolute ${c === 'rock' ? 'top-2 left-1/2 -translate-x-1/2' : c === 'paper' ? 'bottom-2 left-4' : 'bottom-2 right-4'} w-16 h-16 rounded-full p-0 flex items-center justify-center hover:scale-110 transition-transform disabled:opacity-50 disabled:cursor-not-allowed`}
-                  size="lg"
+                  className={`${buttonStyles.choiceButton} ${choiceColors[c]} ${buttonStyles[c]}`}
+                  type="button"
                 >
                   <img src={choiceIcons[c]} alt={c} className="w-8" />
-                </Button>
+                </button>
               ))}
             </div>
           </div>
@@ -110,9 +110,13 @@ export const Game = () => {
 
       {(isRoundComplete || p1 || p2) && (
         <div className="flex justify-center">
-          <Button onClick={resetRound} variant="outline">
+          <button
+            onClick={resetRound}
+            className={`${buttonStyles.button} ${buttonStyles.outline}`}
+            type="button"
+          >
             Play Again
-          </Button>
+          </button>
         </div>
       )}
     </div>

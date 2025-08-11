@@ -1,22 +1,38 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { type VariantProps } from 'class-variance-authority';
 
-import { cn } from '@/lib/utils';
-import { buttonVariants } from './button-variants';
+import classNames from './Button.module.css';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   asChild?: boolean;
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
 }
+
+// Helper function to build class names
+const buildButtonClasses = (variant: string = 'default', size: string = 'default') => {
+  const classes = [classNames.button];
+  // Add variant class
+  if (variant) {
+    classes.push(classNames[variant as keyof typeof classNames]);
+  }
+
+  // Add size class
+  if (size && size !== 'default') {
+    classes.push(classNames[size as keyof typeof classNames]);
+  }
+
+  return classes.join(' ');
+};
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
+    const buttonClasses = buildButtonClasses(variant, size);
+
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={`${buttonClasses} ${className || ''}`}
         ref={ref}
         {...props}
       />
