@@ -16,9 +16,13 @@ export const useGameStore = create<GameState & GameActions>()(
         current: null,
         history: [],
 
-        setMode: (mode: GameMode) => set(() => ({
-          mode, p1Choice: null, p2Choice: null, current: null
-        })),
+        setMode: (mode: GameMode) =>
+          set(() => ({
+            mode,
+            p1Choice: null,
+            p2Choice: null,
+            current: null,
+          })),
 
         choose: (choice: Choice) => {
           const s = get();
@@ -33,9 +37,17 @@ export const useGameStore = create<GameState & GameActions>()(
               p2Choice: cpu,
               p1Score: w === 'player1' ? state.p1Score + 1 : state.p1Score,
               p2Score: w === 'player2' ? state.p2Score + 1 : state.p2Score,
-              history: [{
-                id, p1: choice, p2: cpu, winner: w, mode: 'pve', ts: Date.now()
-              }, ...state.history]
+              history: [
+                {
+                  id,
+                  p1: choice,
+                  p2: cpu,
+                  winner: w,
+                  mode: 'pve',
+                  ts: Date.now(),
+                },
+                ...state.history,
+              ],
             }));
             return;
           }
@@ -56,18 +68,32 @@ export const useGameStore = create<GameState & GameActions>()(
               current: null,
               p1Score: w === 'player1' ? state.p1Score + 1 : state.p1Score,
               p2Score: w === 'player2' ? state.p2Score + 1 : state.p2Score,
-              history: [{
-                id, p1, p2, winner: w, mode: 'pvp', ts: Date.now()
-              }, ...state.history]
+              history: [
+                {
+                  id,
+                  p1,
+                  p2,
+                  winner: w,
+                  mode: 'pvp',
+                  ts: Date.now(),
+                },
+                ...state.history,
+              ],
             }));
           }
         },
 
-        resetRound: () => set({ p1Choice: null, p2Choice: null, current: null }),
-        resetAll: () => set({
-          p1Score: 0, p2Score: 0, history: [],
-          p1Choice: null, p2Choice: null, current: null
-        })
+        resetRound: () =>
+          set({ p1Choice: null, p2Choice: null, current: null }),
+        resetAll: () =>
+          set({
+            p1Score: 0,
+            p2Score: 0,
+            history: [],
+            p1Choice: null,
+            p2Choice: null,
+            current: null,
+          }),
       }),
       { name: 'rps-store' } // handy if you add persist
     )

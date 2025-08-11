@@ -8,7 +8,7 @@ import { useMode, useScores } from '../model/selectors';
 
 export const Scoreboard = () => {
   const mode = useMode();
-  const { p1, p2 } = useScores();          // derived from store: { p1Score, p2Score }
+  const { p1, p2 } = useScores(); // derived from store: { p1Score, p2Score }
   const resetAll = useGameStore(s => s.resetAll);
 
   return (

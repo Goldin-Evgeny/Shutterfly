@@ -14,17 +14,20 @@ const choiceIcons: Record<Choice, string> = {
 };
 
 const colorForWinner = (w: Winner) =>
-  w === 'player1' ? 'text-green-600' :
-    w === 'player2' ? 'text-red-600' :
-      'text-yellow-600';
+  w === 'player1'
+    ? 'text-green-600'
+    : w === 'player2'
+      ? 'text-red-600'
+      : 'text-yellow-600';
 
 const textForWinner = (w: Winner) =>
-  w === 'player1' ? 'Won' :
-    w === 'player2' ? 'Lost' :
-      'Draw';
+  w === 'player1' ? 'Won' : w === 'player2' ? 'Lost' : 'Draw';
 
 // reuse one formatter instance instead of calling toLocale each render
-const timeFmt = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit' });
+const timeFmt = new Intl.DateTimeFormat(undefined, {
+  hour: '2-digit',
+  minute: '2-digit',
+});
 
 export const GameHistory = () => {
   const hasHistory = useHasHistory();
@@ -50,7 +53,7 @@ export const GameHistory = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-3 max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 hover:scrollbar-thumb-gray-500 pr-2">
-          {history.map((game) => (
+          {history.map(game => (
             <div
               key={game.id}
               className="flex items-center justify-between p-3 bg-gray-800 rounded-lg"
@@ -78,7 +81,9 @@ export const GameHistory = () => {
               </div>
 
               <div className="flex items-center gap-2">
-                <span className={`text-sm font-medium ${colorForWinner(game.winner)}`}>
+                <span
+                  className={`text-sm font-medium ${colorForWinner(game.winner)}`}
+                >
                   {textForWinner(game.winner)}
                 </span>
                 <span className="text-xs text-gray-400">

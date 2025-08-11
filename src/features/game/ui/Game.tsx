@@ -7,7 +7,15 @@ import paperIcon from '../assets/paper.svg';
 import scissorsIcon from '../assets/scissors.svg';
 
 import { useGameStore } from '../model/store';
-import { useMode, useRound, useWinner, useCanMakeChoice, useTurnText, useHeadline, useIsRoundComplete } from '../model/selectors';
+import {
+  useMode,
+  useRound,
+  useWinner,
+  useCanMakeChoice,
+  useTurnText,
+  useHeadline,
+  useIsRoundComplete,
+} from '../model/selectors';
 import type { Choice } from '../model/types';
 
 const choiceIcons: Record<Choice, string> = {
@@ -35,7 +43,9 @@ export const Game = () => {
   const resetRound = useGameStore(s => s.resetRound);
 
   const shouldShowP1Choice =
-    mode === 'pve' ? Boolean(p1) : Boolean(p1) && (Boolean(p2) || isRoundComplete);
+    mode === 'pve'
+      ? Boolean(p1)
+      : Boolean(p1) && (Boolean(p2) || isRoundComplete);
 
   return (
     <div className="space-y-6 max-w-md mx-auto">

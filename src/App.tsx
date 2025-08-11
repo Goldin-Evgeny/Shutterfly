@@ -1,4 +1,9 @@
-import { Scoreboard, Game, GameHistory, GameModeSelector } from '@/features/game';
+import {
+  Scoreboard,
+  Game,
+  GameHistory,
+  GameModeSelector,
+} from '@/features/game';
 
 function App() {
   return (

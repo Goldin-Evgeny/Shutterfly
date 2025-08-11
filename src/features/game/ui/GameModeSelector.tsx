@@ -42,7 +42,9 @@ export const GameModeSelector = () => {
             <Users className="h-6 w-6" />
             <div>
               <div className="font-semibold">Player vs Player</div>
-              <div className="text-xs text-gray-300">Two players take turns</div>
+              <div className="text-xs text-gray-300">
+                Two players take turns
+              </div>
             </div>
           </Button>
         </div>

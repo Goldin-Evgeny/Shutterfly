@@ -14,11 +14,16 @@ export const useRound = () => {
   const p1Choice = useP1Choice();
   const p2Choice = useP2Choice();
   const current = useCurrent();
-  return useMemo(() => ({ p1: p1Choice, p2: p2Choice, current }), [p1Choice, p2Choice, current]);
+  return useMemo(
+    () => ({ p1: p1Choice, p2: p2Choice, current }),
+    [p1Choice, p2Choice, current]
+  );
 };
 
 export const useWinner = (): Winner | null =>
-  useGameStore(s => (s.p1Choice && s.p2Choice ? winnerOf(s.p1Choice, s.p2Choice) : null));
+  useGameStore(s =>
+    s.p1Choice && s.p2Choice ? winnerOf(s.p1Choice, s.p2Choice) : null
+  );
 
 export const useIsRoundComplete = () =>
   useGameStore(s => Boolean(s.p1Choice && s.p2Choice));
@@ -46,22 +51,25 @@ export const useHeadline = () =>
     if (!s.p1Choice || !s.p2Choice) return 'Choose your weapon!';
     const w = winnerOf(s.p1Choice as Choice, s.p2Choice as Choice);
     if (s.mode === 'pve') {
-      return w === 'player1' ? 'You win! 🎉'
-           : w === 'player2' ? 'Computer wins! 😔'
-           : "It's a draw! 🤝";
+      return w === 'player1'
+        ? 'You win! 🎉'
+        : w === 'player2'
+          ? 'Computer wins! 😔'
+          : "It's a draw! 🤝";
     }
-    return w === 'player1' ? 'Player 1 wins! 🎉'
-         : w === 'player2' ? 'Player 2 wins! 🎉'
-         : "It's a draw! 🤝";
+    return w === 'player1'
+      ? 'Player 1 wins! 🎉'
+      : w === 'player2'
+        ? 'Player 2 wins! 🎉'
+        : "It's a draw! 🤝";
   });
 
 export const useHistory = (limit = 10) => {
   const history = useGameStore(s => s.history);
   return useMemo(() => history.slice(0, limit), [history, limit]);
 };
-  
-export const useHasHistory = () =>
-  useGameStore(s => s.history.length > 0);
+
+export const useHasHistory = () => useGameStore(s => s.history.length > 0);
 
 // Separate selectors for individual scores to avoid object recreation
 export const useP1Score = () => useGameStore(s => s.p1Score);
@@ -72,5 +80,3 @@ export const useScores = () => {
   const p2Score = useP2Score();
   return useMemo(() => ({ p1: p1Score, p2: p2Score }), [p1Score, p2Score]);
 };
-
-  
