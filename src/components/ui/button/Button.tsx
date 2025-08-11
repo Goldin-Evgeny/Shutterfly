@@ -8,11 +8,8 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?:
     | 'default'
     | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link';
-  size?: 'default' | 'sm' | 'lg' | 'icon';
+    | 'outline';
+  size?: 'default' | 'sm';
 };
 
 // Helper function to build class names

@@ -6,13 +6,6 @@
   padding-top: 2rem;
 }
 
-.title {
-  text-align: center;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  color: white;
-}
-
 .buttonContainer {
   display: flex;
   gap: 1rem;

@@ -31,7 +31,7 @@ function App() {
     <div className={styles.app}>
       <div className={styles.container}>
         {!gameStarted && (
-          <h1 className={styles.title}>Rock, Paper, Scissors</h1>
+          <h1>Rock, Paper, Scissors</h1>
         )}
         {gameStarted && (
           /* Game Screen */
@@ -45,7 +45,7 @@ function App() {
           </>
         )}
         <div>
-          <div className={styles.content}>
+          <div>
             {!gameStarted && (
               /* Game Mode Selection Screen */
               <GameModeSelector />

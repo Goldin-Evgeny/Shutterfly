@@ -14,10 +14,10 @@ export const GameModeSelector = () => {
 
   return (
     <div className={styles.card}>
-      <div className={styles.header}>
-        <h3 className={styles.title}>Select Game Mode</h3>
+      <div>
+        <h3>Select Game Mode</h3>
       </div>
-      <div className={styles.content}>
+      <div>
         <div className={styles.buttonContainer}>
           <Button
             onClick={() => handleModeChange('pve')}
