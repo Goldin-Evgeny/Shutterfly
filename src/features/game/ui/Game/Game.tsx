@@ -53,9 +53,8 @@ export const Game = () => {
             disabled={
               isLocked || !canMakeChoice || isComputer || (isPlayer2 && !p1)
             }
-            className={`${styles.choiceButton} ${choiceColors[c]} ${styles[c]} ${
-              isLocked ? styles.choiceButtonLocked : ''
-            } ${playerChoice === c ? styles.choiceButtonSelected : ''}`}
+            className={`${styles.choiceButton} ${choiceColors[c]} ${styles[c]} ${isLocked ? styles.choiceButtonLocked : ''
+              } ${playerChoice === c ? styles.choiceButtonSelected : ''}`}
             type="button"
           >
             <img
