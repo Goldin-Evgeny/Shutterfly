@@ -1,16 +1,15 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { useGameStore } from '../store/gameStore';
+// features/game/ui/Scoreboard.tsx
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Button } from '@/components/ui/button';
 import { RotateCcw } from 'lucide-react';
 
+import { useGameStore } from '../model/store';
+import { useMode, useScores } from '../model/selectors';
+
 export const Scoreboard = () => {
-  const { playerScore, computerScore, player2Score, gameMode, resetScores } =
-    useGameStore();
+  const mode = useMode();
+  const { p1, p2 } = useScores();          // derived from store: { p1Score, p2Score }
+  const resetAll = useGameStore(s => s.resetAll);
 
   return (
     <Card className="w-full max-w-md mx-auto">
@@ -22,25 +21,21 @@ export const Scoreboard = () => {
       <CardContent className="space-y-4">
         <div className="flex justify-between items-center">
           <div className="text-center w-16">
-            <div className="text-3xl font-bold text-blue-600">
-              {playerScore}
-            </div>
+            <div className="text-3xl font-bold text-blue-600">{p1}</div>
             <div className="text-sm text-gray-300">Player 1</div>
           </div>
           <div className="text-2xl font-bold text-gray-300">vs</div>
           <div className="text-center w-16">
-            <div className="text-3xl font-bold text-red-600">
-              {gameMode === 'pve' ? computerScore : player2Score}
-            </div>
+            <div className="text-3xl font-bold text-red-600">{p2}</div>
             <div className="text-sm text-gray-300">
-              {gameMode === 'pve' ? 'Computer' : 'Player 2'}
+              {mode === 'pve' ? 'Computer' : 'Player 2'}
             </div>
           </div>
         </div>
 
         <div className="flex justify-center">
           <Button
-            onClick={resetScores}
+            onClick={resetAll}
             variant="outline"
             size="sm"
             className="flex items-center gap-2"

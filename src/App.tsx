@@ -1,7 +1,4 @@
-import { Scoreboard } from './components/Scoreboard';
-import { Game } from './components/Game';
-import { GameHistory } from './components/GameHistory';
-import { GameModeSelector } from './components/GameModeSelector';
+import { Scoreboard, Game, GameHistory, GameModeSelector } from '@/features/game';
 
 function App() {
   return (

@@ -1,36 +1,36 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '../components/ui/card';
-import { useGameStore, type GameResult } from '../store/gameStore';
+// features/game/ui/GameHistory.tsx
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import rockIcon from '../assets/rock.svg';
 import paperIcon from '../assets/paper.svg';
 import scissorsIcon from '../assets/scissors.svg';
 
-const choiceIcons = {
+import { useHistory, useHasHistory } from '../model/selectors';
+import type { Choice, Winner } from '../model/types';
+
+const choiceIcons: Record<Choice, string> = {
   rock: rockIcon,
   paper: paperIcon,
   scissors: scissorsIcon,
 };
 
-const resultColors: Record<GameResult, string> = {
-  win: 'text-green-600',
-  lose: 'text-red-600',
-  draw: 'text-yellow-600',
-};
+const colorForWinner = (w: Winner) =>
+  w === 'player1' ? 'text-green-600' :
+    w === 'player2' ? 'text-red-600' :
+      'text-yellow-600';
 
-const resultTexts: Record<GameResult, string> = {
-  win: 'Won',
-  lose: 'Lost',
-  draw: 'Draw',
-};
+const textForWinner = (w: Winner) =>
+  w === 'player1' ? 'Won' :
+    w === 'player2' ? 'Lost' :
+      'Draw';
+
+// reuse one formatter instance instead of calling toLocale each render
+const timeFmt = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit' });
 
 export const GameHistory = () => {
-  const { gameHistory } = useGameStore();
+  const hasHistory = useHasHistory();
+  const history = useHistory(10);
 
-  if (gameHistory.length === 0) {
+  if (!hasHistory) {
     return (
       <Card className="max-w-md mx-auto">
         <CardHeader>
@@ -50,16 +50,16 @@ export const GameHistory = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-3 max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 hover:scrollbar-thumb-gray-500 pr-2">
-          {gameHistory.slice(0, 10).map((game, index) => (
+          {history.map((game) => (
             <div
-              key={index}
+              key={game.id}
               className="flex items-center justify-between p-3 bg-gray-800 rounded-lg"
             >
               <div className="flex items-center gap-3">
                 <div className="flex flex-col items-center">
                   <img
-                    src={choiceIcons[game.playerChoice]}
-                    alt={game.playerChoice}
+                    src={choiceIcons[game.p1]}
+                    alt={game.p1}
                     className="w-5"
                   />
                   <span className="text-xs text-gray-400">P1</span>
@@ -67,33 +67,22 @@ export const GameHistory = () => {
                 <span className="text-sm">vs</span>
                 <div className="flex flex-col items-center">
                   <img
-                    src={
-                      choiceIcons[
-                        game.gameMode === 'pve'
-                          ? game.computerChoice!
-                          : game.player2Choice!
-                      ]
-                    }
-                    alt={
-                      game.gameMode === 'pve'
-                        ? game.computerChoice!
-                        : game.player2Choice!
-                    }
+                    src={choiceIcons[game.p2]}
+                    alt={game.p2}
                     className="w-5"
                   />
                   <span className="text-xs text-gray-400">
-                    {game.gameMode === 'pve' ? 'CPU' : 'P2'}
+                    {game.mode === 'pve' ? 'CPU' : 'P2'}
                   </span>
                 </div>
               </div>
+
               <div className="flex items-center gap-2">
-                <span
-                  className={`text-sm font-medium ${resultColors[game.result]}`}
-                >
-                  {resultTexts[game.result]}
+                <span className={`text-sm font-medium ${colorForWinner(game.winner)}`}>
+                  {textForWinner(game.winner)}
                 </span>
                 <span className="text-xs text-gray-400">
-                  {game.timestamp.toLocaleTimeString()}
+                  {timeFmt.format(new Date(game.ts))}
                 </span>
               </div>
             </div>
