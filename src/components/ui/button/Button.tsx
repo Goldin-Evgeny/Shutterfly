@@ -5,10 +5,7 @@ import classNames from './Button.module.css';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   asChild?: boolean;
-  variant?:
-    | 'default'
-    | 'destructive'
-    | 'outline';
+  variant?: 'default' | 'destructive' | 'outline';
   size?: 'default' | 'sm';
 };
 

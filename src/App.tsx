@@ -30,9 +30,7 @@ function App() {
   return (
     <div className={styles.app}>
       <div className={styles.container}>
-        {!gameStarted && (
-          <h1>Rock, Paper, Scissors</h1>
-        )}
+        {!gameStarted && <h1>Rock, Paper, Scissors</h1>}
         {gameStarted && (
           <div className={styles.menuButtonContainer}>
             <Button onClick={handleBackToMenu} type="button" size="sm">
@@ -40,9 +38,7 @@ function App() {
             </Button>
           </div>
         )}
-        {!gameStarted && (
-          <GameModeSelector />
-        )}
+        {!gameStarted && <GameModeSelector />}
 
         {gameStarted && (
           <>

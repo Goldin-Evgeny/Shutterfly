@@ -1,4 +1,3 @@
-// features/game/model/store.ts
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { randomChoice, winnerOf } from './rules';
