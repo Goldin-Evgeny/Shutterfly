@@ -3,6 +3,48 @@ import { devtools, persist } from 'zustand/middleware';
 import { randomChoice, winnerOf } from './rules';
 import type { Choice, GameActions, GameState, GameMode, Winner } from './types';
 
+const createGameResult = (
+  p1: Choice,
+  p2: Choice,
+  mode: GameMode,
+  winner: Winner
+) => ({
+  id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+  p1,
+  p2,
+  winner,
+  mode,
+  ts: Date.now(),
+});
+
+const updateGameState = (
+  state: GameState,
+  p1: Choice,
+  p2: Choice,
+  mode: GameMode
+) => {
+  const winner = winnerOf(p1, p2);
+  const gameResult = createGameResult(p1, p2, mode, winner);
+  
+  return {
+    p1Choice: p1,
+    p2Choice: p2,
+    p1Score: winner === 'player1' ? state.p1Score + 1 : state.p1Score,
+    p2Score: winner === 'player2' ? state.p2Score + 1 : state.p2Score,
+    history: [gameResult, ...state.history],
+  };
+};
+
+const getResetState = (includeGameStarted = false) => ({
+  p1Score: 0,
+  p2Score: 0,
+  history: [],
+  p1Choice: null,
+  p2Choice: null,
+  current: null,
+  ...(includeGameStarted && { gameStarted: false }),
+});
+
 export const useGameStore = create<GameState & GameActions>()(
   devtools(
     persist(
@@ -34,60 +76,25 @@ export const useGameStore = create<GameState & GameActions>()(
           })),
 
         choose: (choice: Choice) => {
-          const s = get();
+          const state = get();
 
-          if (s.mode === 'pve') {
+          if (state.mode === 'pve') {
             const cpu = randomChoice();
-            const w: Winner = winnerOf(choice, cpu);
-            const id = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-
-            set(state => ({
-              p1Choice: choice,
-              p2Choice: cpu,
-              p1Score: w === 'player1' ? state.p1Score + 1 : state.p1Score,
-              p2Score: w === 'player2' ? state.p2Score + 1 : state.p2Score,
-              history: [
-                {
-                  id,
-                  p1: choice,
-                  p2: cpu,
-                  winner: w,
-                  mode: 'pve',
-                  ts: Date.now(),
-                },
-                ...state.history,
-              ],
-            }));
+            set(prevState => updateGameState(prevState, choice, cpu, 'pve'));
             return;
           }
 
           // PvP
-          if (s.current === null) {
+          if (state.current === null) {
             set({ p1Choice: choice, current: 'player2' });
             return;
           }
-          if (s.current === 'player2') {
-            const p1 = s.p1Choice!;
-            const p2 = choice;
-            const w: Winner = winnerOf(p1, p2);
-            const id = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-
-            set(state => ({
-              p2Choice: p2,
+          
+          if (state.current === 'player2') {
+            const p1 = state.p1Choice!;
+            set(prevState => ({
+              ...updateGameState(prevState, p1, choice, 'pvp'),
               current: null,
-              p1Score: w === 'player1' ? state.p1Score + 1 : state.p1Score,
-              p2Score: w === 'player2' ? state.p2Score + 1 : state.p2Score,
-              history: [
-                {
-                  id,
-                  p1,
-                  p2,
-                  winner: w,
-                  mode: 'pvp',
-                  ts: Date.now(),
-                },
-                ...state.history,
-              ],
             }));
           }
         },
@@ -96,25 +103,10 @@ export const useGameStore = create<GameState & GameActions>()(
           set({ p1Choice: null, p2Choice: null, current: null }),
 
         resetScores: () =>
-          set({
-            p1Score: 0,
-            p2Score: 0,
-            history: [],
-            p1Choice: null,
-            p2Choice: null,
-            current: null,
-          }),
+          set(getResetState()),
 
         resetAll: () =>
-          set({
-            p1Score: 0,
-            p2Score: 0,
-            history: [],
-            gameStarted: false,
-            p1Choice: null,
-            p2Choice: null,
-            current: null,
-          }),
+          set(getResetState(true)),
       }),
       { name: 'rps-store' } // handy if you add persist
     )
