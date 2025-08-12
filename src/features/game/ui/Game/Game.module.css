@@ -18,52 +18,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 2rem;
-}
-
-@media (max-width: 768px) {
-  .choicesContainer {
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .choicesContainer {
-    gap: 1rem;
-  }
-}
-
-.rock {
-  background-color: #f97316;
-  color: white;
-}
-
-.rock:hover {
-  background-color: #ea580c;
-}
-
-.paper {
-  background-color: #3b82f6;
-  color: white;
-}
-
-.paper:hover {
-  background-color: #2563eb;
-}
-
-.scissors {
-  background-color: #22c55e;
-  color: white;
-}
-
-.scissors:hover {
-  background-color: #16a34a;
-}
-
-@media (max-width: 480px) {
-  .choicesContainer {
-    gap: 0.75rem;
-  }
+  gap: clamp(0.75rem, 2vw, 2rem);
 }
 
 .playerChoice {
@@ -80,43 +35,11 @@
   margin-bottom: 0.5rem;
 }
 
-.choiceIcon {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-  min-height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .choiceIconSmall {
-  width: 2rem;
+  width: clamp(1.25rem, 3vw, 2rem);
 }
 
-/* Responsive icon sizing */
-@media (max-width: 768px) {
-  .choiceIconSmall {
-    width: 1.75rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .choiceIconSmall {
-    width: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .choiceIconSmall {
-    width: 1.25rem;
-  }
-}
-
-.choiceButtonsContainer {
-  display: flex;
-  justify-content: center;
-}
-
+.choiceButtonsContainer,
 .playAgainContainer {
   display: flex;
   justify-content: center;
@@ -135,6 +58,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
   animation: lockPulse 2s ease-in-out infinite;
 }
 
@@ -164,16 +88,17 @@
   }
 }
 
+/* Button layout container */
 .choiceContainer {
   position: relative;
-  width: 12rem;
-  height: 10rem;
+  width: clamp(7rem, 20vw, 12rem);
+  height: clamp(6rem, 16vw, 10rem);
 }
 
 .choiceButton {
   position: absolute;
-  width: 4rem;
-  height: 4rem;
+  width: clamp(2.5rem, 7vw, 4rem);
+  height: clamp(2.5rem, 7vw, 4rem);
   border-radius: 50%;
   padding: 0;
   display: flex;
@@ -182,51 +107,16 @@
   color: white;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-  font-size: 1rem;
+  font-size: clamp(0.625rem, 1.8vw, 1rem);
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  --scale: 1;
+  transform: scale(var(--scale));
 }
 
-@media (max-width: 768px) {
-  .choiceContainer {
-    width: 10rem;
-    height: 8rem;
+@media (hover: hover) {
+  .choiceButton:hover:not(:disabled) {
+    --scale: 1.1;
   }
-
-  .choiceButton {
-    width: 3.5rem;
-    height: 3.5rem;
-    font-size: 0.875rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .choiceContainer {
-    width: 9rem;
-    height: 7.5rem;
-  }
-
-  .choiceButton {
-    width: 3rem;
-    height: 3rem;
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .choiceContainer {
-    width: 7rem;
-    height: 6rem;
-  }
-
-  .choiceButton {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 0.625rem;
-  }
-}
-
-.choiceButton:hover:not(:disabled) {
-  transform: scale(1.1);
 }
 
 .choiceButton:disabled {
@@ -235,18 +125,38 @@
 }
 
 .choiceButton:focus-visible {
-  outline: 2px solid var(--ring);
+  outline: 2px solid var(--ring, #60a5fa);
   outline-offset: 2px;
+}
+
+.rock {
+  background-color: #f97316;
+  color: white;
+}
+.rock:hover {
+  background-color: #ea580c;
+}
+
+.paper {
+  background-color: #3b82f6;
+  color: white;
+}
+.paper:hover {
+  background-color: #2563eb;
+}
+
+.scissors {
+  background-color: #22c55e;
+  color: white;
+}
+.scissors:hover {
+  background-color: #16a34a;
 }
 
 .choiceButton.rock {
   top: 0.5rem;
   left: 50%;
-  transform: translateX(-50%);
-}
-
-.choiceButton.rock:hover:not(:disabled) {
-  transform: translateX(-50%) scale(1.1);
+  transform: translateX(-50%) scale(var(--scale));
 }
 
 .choiceButton.paper {
@@ -259,50 +169,9 @@
   right: 1rem;
 }
 
-@media (max-width: 768px) {
-  .choiceButton.rock {
-    top: 0.25rem;
-  }
-
-  .choiceButton.paper {
-    bottom: 0.25rem;
-    left: 0.75rem;
-  }
-
-  .choiceButton.scissors {
-    bottom: 0.25rem;
-    right: 0.75rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .choiceButton.rock {
-    top: 0.5rem;
-  }
-
-  .choiceButton.paper {
-    bottom: 0.5rem;
-    left: 0.75rem;
-  }
-
-  .choiceButton.scissors {
-    bottom: 0.5rem;
-    right: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .choiceButton.rock {
-    top: 0.75rem;
-  }
-
-  .choiceButton.paper {
-    bottom: 0.75rem;
-    left: 0.5rem;
-  }
-
-  .choiceButton.scissors {
-    bottom: 0.75rem;
-    right: 0.5rem;
+@media (prefers-reduced-motion: reduce) {
+  .choiceButtonSelected,
+  .choiceButtonLocked::after {
+    animation: none;
   }
 }

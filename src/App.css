@@ -1,4 +1,3 @@
-/* Custom scrollbar for game history */
 .overflow-y-auto::-webkit-scrollbar {
   width: 6px;
 }
@@ -15,13 +14,4 @@
 
 .overflow-y-auto::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
-}
-
-/* Chart color variables - these are specific to the app and not in index.css */
-:root {
-  --chart-1: #dc2626;
-  --chart-2: #059669;
-  --chart-3: #1e293b;
-  --chart-4: #eab308;
-  --chart-5: #ea580c;
 }

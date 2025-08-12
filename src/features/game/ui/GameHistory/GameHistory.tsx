@@ -1,4 +1,3 @@
-// features/game/ui/GameHistory.tsx
 import rockIcon from '../../assets/rock.svg';
 import paperIcon from '../../assets/paper.svg';
 import scissorsIcon from '../../assets/scissors.svg';
@@ -23,7 +22,6 @@ const colorForWinner = (w: Winner) =>
 const textForWinner = (w: Winner) =>
   w === 'player1' ? 'Won' : w === 'player2' ? 'Lost' : 'Draw';
 
-// reuse one formatter instance instead of calling toLocale each render
 const timeFmt = new Intl.DateTimeFormat(undefined, {
   hour: '2-digit',
   minute: '2-digit',

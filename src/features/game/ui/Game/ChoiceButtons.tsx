@@ -11,12 +11,6 @@ const choiceIcons: Record<Choice, string> = {
   scissors: scissorsIcon,
 };
 
-const choiceColors: Record<Choice, string> = {
-  rock: styles.rock,
-  paper: styles.paper,
-  scissors: styles.scissors,
-};
-
 type ChoiceButtonsProps = {
   playerChoice: Choice | null;
   onChoice: (choice: Choice) => void;
@@ -38,27 +32,23 @@ export const ChoiceButtons = ({
 }: ChoiceButtonsProps) => (
   <div className={styles.choiceButtonsContainer}>
     <div className={styles.choiceContainer}>
-      {(['rock', 'paper', 'scissors'] as const).map(c => (
+      {(['rock', 'paper', 'scissors'] as const).map((c) => (
         <button
           key={c}
           onClick={() => onChoice(c)}
+          aria-label={`choose ${c}`}
           disabled={
             isLocked || !canMakeChoice || isComputer || (isPlayer2 && !p1)
           }
           className={clsx(
             styles.choiceButton,
-            choiceColors[c],
-            styles[c],
+            styles[c], // color + used by positional selectors
             isLocked && styles.choiceButtonLocked,
             playerChoice === c && styles.choiceButtonSelected
           )}
           type="button"
         >
-          <img
-            src={choiceIcons[c]}
-            alt={c}
-            className={styles.choiceIconSmall}
-          />
+          <img src={choiceIcons[c]} alt={c} className={styles.choiceIconSmall} />
         </button>
       ))}
     </div>

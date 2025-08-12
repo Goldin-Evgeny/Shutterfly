@@ -1,4 +1,3 @@
-// features/game/ui/Scoreboard.tsx
 import { Button } from '@/components/ui/button';
 import { RotateCcw } from 'lucide-react';
 
@@ -8,7 +7,7 @@ import styles from './Scoreboard.module.css';
 
 export const Scoreboard = () => {
   const mode = useMode();
-  const { p1, p2 } = useScores(); // derived from store: { p1Score, p2Score }
+  const { p1, p2 } = useScores();
   const resetScores = useGameStore(s => s.resetScores);
 
   return (

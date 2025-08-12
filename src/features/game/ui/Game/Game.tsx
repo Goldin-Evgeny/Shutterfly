@@ -18,13 +18,14 @@ export const Game = () => {
   const headline = useHeadline();
   const isRoundComplete = useIsRoundComplete();
 
-  const choose = useGameStore(s => s.choose);
-  const resetRound = useGameStore(s => s.resetRound);
+  const choose = useGameStore((s) => s.choose);
+  const resetRound = useGameStore((s) => s.resetRound);
 
   return (
     <div className={styles.container}>
       <div className={styles.gameCard}>
         <div className={styles.gameTitle}>{headline}</div>
+
         <div className={styles.choicesContainer}>
           <div className={styles.playerChoice}>
             <div className={styles.playerLabel}>Player 1</div>
@@ -36,6 +37,7 @@ export const Game = () => {
               p1={p1}
             />
           </div>
+
           <div className={styles.playerChoice}>
             <div className={styles.playerLabel}>
               {mode === 'pve' ? 'Computer' : 'Player 2'}
