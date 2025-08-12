@@ -161,12 +161,12 @@
 
 .choiceButton.paper {
   bottom: 0.5rem;
-  left: 1rem;
+  left: 0.5rem;
 }
 
 .choiceButton.scissors {
   bottom: 0.5rem;
-  right: 1rem;
+  right: 0.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,12 +1,12 @@
 .app {
   min-height: 100vh;
   background: linear-gradient(to top, #09203f 0%, #537895 100%);
-  padding: 2rem 1rem;
 }
 
 .container {
   max-width: 64rem;
   margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
 .menuButtonContainer {
