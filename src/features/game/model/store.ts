@@ -25,7 +25,7 @@ const updateGameState = (
 ) => {
   const winner = winnerOf(p1, p2);
   const gameResult = createGameResult(p1, p2, mode, winner);
-  
+
   return {
     p1Choice: p1,
     p2Choice: p2,
@@ -89,7 +89,7 @@ export const useGameStore = create<GameState & GameActions>()(
             set({ p1Choice: choice, current: 'player2' });
             return;
           }
-          
+
           if (state.current === 'player2') {
             const p1 = state.p1Choice!;
             set(prevState => ({
@@ -102,13 +102,11 @@ export const useGameStore = create<GameState & GameActions>()(
         resetRound: () =>
           set({ p1Choice: null, p2Choice: null, current: null }),
 
-        resetScores: () =>
-          set(getResetState()),
+        resetScores: () => set(getResetState()),
 
-        resetAll: () =>
-          set(getResetState(true)),
+        resetAll: () => set(getResetState(true)),
       }),
-      { name: 'rps-store' } // handy if you add persist
+      { name: 'rps-store' } // use for persist
     )
   )
 );

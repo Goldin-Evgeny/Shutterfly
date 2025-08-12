@@ -21,7 +21,6 @@
   gap: 2rem;
 }
 
-/* Responsive adjustments for choices container */
 @media (max-width: 768px) {
   .choicesContainer {
     gap: 1.5rem;
@@ -34,7 +33,6 @@
   }
 }
 
-/* Game-specific colors for Rock Paper Scissors */
 .rock {
   background-color: #f97316;
   color: white;
@@ -114,8 +112,6 @@
   }
 }
 
-
-
 .choiceButtonsContainer {
   display: flex;
   justify-content: center;
@@ -126,7 +122,6 @@
   justify-content: center;
 }
 
-/* Locked state styles */
 .choiceButtonLocked::after {
   content: '🔒';
   position: absolute;
@@ -155,8 +150,6 @@
   }
 }
 
-
-
 .choiceButtonSelected {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
   animation: selectedGlow 1.5s ease-in-out infinite alternate;
@@ -171,7 +164,6 @@
   }
 }
 
-/* Choice container and buttons for Rock Paper Scissors game */
 .choiceContainer {
   position: relative;
   width: 12rem;
@@ -194,7 +186,6 @@
   font-size: 1rem;
 }
 
-/* Responsive sizing for choice buttons */
 @media (max-width: 768px) {
   .choiceContainer {
     width: 10rem;
@@ -248,7 +239,6 @@
   outline-offset: 2px;
 }
 
-/* Position the buttons in a triangle pattern */
 .choiceButton.rock {
   top: 0.5rem;
   left: 50%;
@@ -269,7 +259,6 @@
   right: 1rem;
 }
 
-/* Responsive positioning adjustments */
 @media (max-width: 768px) {
   .choiceButton.rock {
     top: 0.25rem;

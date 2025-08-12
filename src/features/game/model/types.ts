@@ -4,12 +4,12 @@ export type GameMode = 'pve' | 'pvp';
 export type Winner = 'player1' | 'player2' | 'draw';
 
 export type Round = {
-  id: string; // stable key for lists
+  id: string;
   p1: Choice;
   p2: Choice;
   winner: Winner;
   mode: GameMode;
-  ts: number; // number is safer than Date in state/persist
+  ts: number;
 };
 
 export type GameState = {

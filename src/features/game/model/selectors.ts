@@ -6,10 +6,11 @@ import { useMemo } from 'react';
 export const useMode = () => useGameStore(s => s.mode);
 export const useGameStarted = () => useGameStore(s => s.gameStarted);
 
-// Separate selectors for individual values to avoid object recreation
 export const useP1Choice = () => useGameStore(s => s.p1Choice);
 export const useP2Choice = () => useGameStore(s => s.p2Choice);
 export const useCurrent = () => useGameStore(s => s.current);
+export const useP1Score = () => useGameStore(s => s.p1Score);
+export const useP2Score = () => useGameStore(s => s.p2Score);
 
 export const useRound = () => {
   const p1Choice = useP1Choice();
@@ -19,6 +20,12 @@ export const useRound = () => {
     () => ({ p1: p1Choice, p2: p2Choice, current }),
     [p1Choice, p2Choice, current]
   );
+};
+
+export const useScores = () => {
+  const p1Score = useP1Score();
+  const p2Score = useP2Score();
+  return useMemo(() => ({ p1: p1Score, p2: p2Score }), [p1Score, p2Score]);
 };
 
 export const useWinner = (): Winner | null =>
@@ -32,18 +39,30 @@ export const useIsRoundComplete = () =>
 export const useCanMakeChoice = () =>
   useGameStore(s => {
     const complete = Boolean(s.p1Choice && s.p2Choice);
-    if (s.mode === 'pve') return !complete;
-    if (s.current === 'player2') return true;
-    if (s.current === null && !complete) return true; // player1's turn
+    if (s.mode === 'pve') {
+      return !complete;
+    }
+    if (s.current === 'player2') {
+      return true;
+    }
+    if (s.current === null && !complete) {
+      return true; // player1's turn
+    }
     return false;
   });
 
 export const useTurnText = () =>
   useGameStore(s => {
     const complete = Boolean(s.p1Choice && s.p2Choice);
-    if (s.mode === 'pve') return 'Make Your Choice';
-    if (s.current === 'player2') return "Player 2's Turn";
-    if (complete) return 'Game Complete';
+    if (s.mode === 'pve') {
+      return 'Make Your Choice';
+    }
+    if (s.current === 'player2') {
+      return "Player 2's Turn";
+    }
+    if (complete) {
+      return 'Game Complete';
+    }
     return "Player 1's Turn";
   });
 
@@ -71,13 +90,3 @@ export const useHistory = (limit = 10) => {
 };
 
 export const useHasHistory = () => useGameStore(s => s.history.length > 0);
-
-// Separate selectors for individual scores to avoid object recreation
-export const useP1Score = () => useGameStore(s => s.p1Score);
-export const useP2Score = () => useGameStore(s => s.p2Score);
-
-export const useScores = () => {
-  const p1Score = useP1Score();
-  const p2Score = useP2Score();
-  return useMemo(() => ({ p1: p1Score, p2: p2Score }), [p1Score, p2Score]);
-};

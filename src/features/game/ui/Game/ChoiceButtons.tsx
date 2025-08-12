@@ -3,6 +3,7 @@ import rockIcon from '../../assets/rock.svg';
 import paperIcon from '../../assets/paper.svg';
 import scissorsIcon from '../../assets/scissors.svg';
 import type { Choice } from '../../model/types';
+import clsx from 'clsx';
 
 const choiceIcons: Record<Choice, string> = {
   rock: rockIcon,
@@ -16,7 +17,7 @@ const choiceColors: Record<Choice, string> = {
   scissors: styles.scissors,
 };
 
-interface ChoiceButtonsProps {
+type ChoiceButtonsProps = {
   playerChoice: Choice | null;
   onChoice: (choice: Choice) => void;
   isLocked: boolean;
@@ -24,7 +25,7 @@ interface ChoiceButtonsProps {
   isPlayer2?: boolean;
   canMakeChoice: boolean;
   p1: Choice | null;
-}
+};
 
 export const ChoiceButtons = ({
   playerChoice,
@@ -44,9 +45,13 @@ export const ChoiceButtons = ({
           disabled={
             isLocked || !canMakeChoice || isComputer || (isPlayer2 && !p1)
           }
-          className={`${styles.choiceButton} ${choiceColors[c]} ${styles[c]} ${
-            isLocked ? styles.choiceButtonLocked : ''
-          } ${playerChoice === c ? styles.choiceButtonSelected : ''}`}
+          className={clsx(
+            styles.choiceButton,
+            choiceColors[c],
+            styles[c],
+            isLocked && styles.choiceButtonLocked,
+            playerChoice === c && styles.choiceButtonSelected
+          )}
           type="button"
         >
           <img

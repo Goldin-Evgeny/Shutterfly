@@ -9,18 +9,15 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: 'default' | 'sm';
 };
 
-// Helper function to build class names
 const buildButtonClasses = (
   variant: string = 'default',
   size: string = 'default'
 ) => {
   const classes = [classNames.button];
-  // Add variant class
   if (variant) {
     classes.push(classNames[variant as keyof typeof classNames]);
   }
 
-  // Add size class
   if (size && size !== 'default') {
     classes.push(classNames[size as keyof typeof classNames]);
   }
