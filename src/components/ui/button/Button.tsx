@@ -15,11 +15,11 @@ const buildButtonClasses = (
 ) => {
   const classes = [classNames.button];
   if (variant) {
-    classes.push(classNames[variant as keyof typeof classNames]);
+    classes.push(classNames[variant]);
   }
 
   if (size && size !== 'default') {
-    classes.push(classNames[size as keyof typeof classNames]);
+    classes.push(classNames[size]);
   }
 
   return classes.join(' ');

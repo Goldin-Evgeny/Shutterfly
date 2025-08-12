@@ -39,49 +39,62 @@ export const useIsRoundComplete = () =>
 export const useCanMakeChoice = () =>
   useGameStore(s => {
     const complete = Boolean(s.p1Choice && s.p2Choice);
-    if (s.mode === 'pve') {
-      return !complete;
-    }
-    if (s.current === 'player2') {
-      return true;
-    }
-    if (s.current === null && !complete) {
-      return true; // player1's turn
-    }
-    return false;
+    
+    const modeLogic = {
+      pve: () => !complete,
+      pvp: () => {
+        const player2Turn = s.current === 'player2';
+        const player1Turn = s.current === null && !complete;
+        return player2Turn || player1Turn;
+      }
+    };
+    
+    return modeLogic[s.mode]();
   });
 
 export const useTurnText = () =>
   useGameStore(s => {
     const complete = Boolean(s.p1Choice && s.p2Choice);
-    if (s.mode === 'pve') {
-      return 'Make Your Choice';
-    }
-    if (s.current === 'player2') {
-      return "Player 2's Turn";
-    }
-    if (complete) {
-      return 'Game Complete';
-    }
-    return "Player 1's Turn";
+    
+    const modeTextMap = {
+      pve: () => 'Make Your Choice',
+      pvp: () => {
+        const turnTextMap = {
+          player2: "Player 2's Turn",
+          null: complete ? 'Game Complete' : "Player 1's Turn"
+        };
+        return turnTextMap[s.current as keyof typeof turnTextMap] || "Player 1's Turn";
+      }
+    };
+    
+    return modeTextMap[s.mode]();
   });
 
 export const useHeadline = () =>
   useGameStore(s => {
     if (!s.p1Choice || !s.p2Choice) return 'Choose your weapon!';
     const w = winnerOf(s.p1Choice as Choice, s.p2Choice as Choice);
-    if (s.mode === 'pve') {
-      return w === 'player1'
-        ? 'You win! 🎉'
-        : w === 'player2'
-          ? 'Computer wins! 😔'
-          : "It's a draw! 🤝";
-    }
-    return w === 'player1'
-      ? 'Player 1 wins! 🎉'
-      : w === 'player2'
-        ? 'Player 2 wins! 🎉'
-        : "It's a draw! 🤝";
+    
+    const modeHeadlineMap = {
+      pve: () => {
+        const pveResultMap = {
+          player1: 'You win! 🎉',
+          player2: 'Computer wins! 😔',
+          draw: "It's a draw! 🤝"
+        };
+        return pveResultMap[w];
+      },
+      pvp: () => {
+        const pvpResultMap = {
+          player1: 'Player 1 wins! 🎉',
+          player2: 'Player 2 wins! 🎉',
+          draw: "It's a draw! 🤝"
+        };
+        return pvpResultMap[w];
+      }
+    };
+    
+    return modeHeadlineMap[s.mode]();
   });
 
 export const useHistory = (limit = 10) => {
